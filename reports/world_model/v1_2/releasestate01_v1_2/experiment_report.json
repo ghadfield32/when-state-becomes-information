@@ -1,0 +1,253 @@
+{
+ "status": "COMPLETE_RELEASE_STATE_EXPERIMENT",
+ "packet": "OW-RELEASE-STATE-01-v1_2",
+ "protocol_scientific_digest": "b0a8399d6d6acd61b5f4f660556a7ddc47821f356610579d4df3d1c577eeb141",
+ "horizon_ms": 100,
+ "scored_examples": 9619,
+ "by_athlete_examples": {
+  "P0001": 3095,
+  "P0002": 3315,
+  "P0003": 3209
+ },
+ "feature_dimension": {
+  "M3": 75,
+  "M3b": 99,
+  "M4": 339
+ },
+ "PRIMARY_preregistered_grid": {
+  "selected_alpha_by_outer_fold": {
+   "M3": {
+    "P0001": 100.0,
+    "P0002": 100.0,
+    "P0003": 100.0
+   },
+   "M3b": {
+    "P0001": 100.0,
+    "P0002": 100.0,
+    "P0003": 100.0
+   },
+   "M4": {
+    "P0001": 100.0,
+    "P0002": 100.0,
+    "P0003": 100.0
+   }
+  },
+  "fits_with_alpha_at_grid_maximum": "9/9",
+  "mean_error_m": {
+   "M3": {
+    "P0001": 0.19494,
+    "P0002": 0.13225,
+    "P0003": 0.15241
+   },
+   "M3b": {
+    "P0001": 0.19409,
+    "P0002": 0.13221,
+    "P0003": 0.15216
+   },
+   "M4": {
+    "P0001": 0.19436,
+    "P0002": 0.12906,
+    "P0003": 0.15216
+   }
+  },
+  "aggregate_mean_of_athlete_means_m": {
+   "M3": 0.15986,
+   "M3b": 0.15949,
+   "M4": 0.15853
+  },
+  "primary_M4_minus_M3": {
+   "P0001": {
+    "n": 3095,
+    "mean_m": -0.000581,
+    "median_m": -0.000165,
+    "share_improved": 0.5024
+   },
+   "P0002": {
+    "n": 3315,
+    "mean_m": -0.00319,
+    "median_m": -0.005678,
+    "share_improved": 0.5816
+   },
+   "P0003": {
+    "n": 3209,
+    "mean_m": -0.000241,
+    "median_m": -0.001663,
+    "share_improved": 0.5139
+   },
+   "aggregate_mean_of_athlete_means_m": -0.001337
+  },
+  "secondary_M4_minus_M3b": {
+   "P0001": {
+    "n": 3095,
+    "mean_m": 0.000267,
+    "median_m": -0.000209,
+    "share_improved": 0.504
+   },
+   "P0002": {
+    "n": 3315,
+    "mean_m": -0.00315,
+    "median_m": -0.002547,
+    "share_improved": 0.5535
+   },
+   "P0003": {
+    "n": 3209,
+    "mean_m": 1e-06,
+    "median_m": 0.000203,
+    "share_improved": 0.4967
+   },
+   "aggregate_mean_of_athlete_means_m": -0.000961
+  },
+  "secondary_M3b_minus_M3": {
+   "P0001": {
+    "n": 3095,
+    "mean_m": -0.000848,
+    "median_m": 0.00045,
+    "share_improved": 0.4869
+   },
+   "P0002": {
+    "n": 3315,
+    "mean_m": -4e-05,
+    "median_m": -0.000939,
+    "share_improved": 0.536
+   },
+   "P0003": {
+    "n": 3209,
+    "mean_m": -0.000242,
+    "median_m": -0.000892,
+    "share_improved": 0.5326
+   },
+   "aggregate_mean_of_athlete_means_m": -0.000377
+  }
+ },
+ "amended_RS_A2_grid_reported_alongside": {
+  "selected_alpha_by_outer_fold": {
+   "M3": {
+    "P0001": 100.0,
+    "P0002": 1000.0,
+    "P0003": 1000.0
+   },
+   "M3b": {
+    "P0001": 100.0,
+    "P0002": 1000.0,
+    "P0003": 1000.0
+   },
+   "M4": {
+    "P0001": 100.0,
+    "P0002": 1000.0,
+    "P0003": 1000.0
+   }
+  },
+  "fits_with_alpha_at_grid_maximum": "0/9",
+  "mean_error_m": {
+   "M3": {
+    "P0001": 0.19494,
+    "P0002": 0.13829,
+    "P0003": 0.15092
+   },
+   "M3b": {
+    "P0001": 0.19409,
+    "P0002": 0.13494,
+    "P0003": 0.1561
+   },
+   "M4": {
+    "P0001": 0.19436,
+    "P0002": 0.13047,
+    "P0003": 0.15747
+   }
+  },
+  "aggregate_mean_of_athlete_means_m": {
+   "M3": 0.16138,
+   "M3b": 0.16171,
+   "M4": 0.16076
+  },
+  "primary_M4_minus_M3": {
+   "P0001": {
+    "n": 3095,
+    "mean_m": -0.000581,
+    "median_m": -0.000165,
+    "share_improved": 0.5024
+   },
+   "P0002": {
+    "n": 3315,
+    "mean_m": -0.007822,
+    "median_m": -0.014924,
+    "share_improved": 0.6124
+   },
+   "P0003": {
+    "n": 3209,
+    "mean_m": 0.006548,
+    "median_m": 0.001777,
+    "share_improved": 0.4709
+   },
+   "aggregate_mean_of_athlete_means_m": -0.000618
+  },
+  "secondary_M4_minus_M3b": {
+   "P0001": {
+    "n": 3095,
+    "mean_m": 0.000267,
+    "median_m": -0.000209,
+    "share_improved": 0.504
+   },
+   "P0002": {
+    "n": 3315,
+    "mean_m": -0.004477,
+    "median_m": -0.007292,
+    "share_improved": 0.6006
+   },
+   "P0003": {
+    "n": 3209,
+    "mean_m": 0.001367,
+    "median_m": -0.000559,
+    "share_improved": 0.5092
+   },
+   "aggregate_mean_of_athlete_means_m": -0.000948
+  },
+  "secondary_M3b_minus_M3": {
+   "P0001": {
+    "n": 3095,
+    "mean_m": -0.000848,
+    "median_m": 0.00045,
+    "share_improved": 0.4869
+   },
+   "P0002": {
+    "n": 3315,
+    "mean_m": -0.003345,
+    "median_m": -0.006277,
+    "share_improved": 0.613
+   },
+   "P0003": {
+    "n": 3209,
+    "mean_m": 0.005181,
+    "median_m": 0.002586,
+    "share_improved": 0.3777
+   },
+   "aggregate_mean_of_athlete_means_m": 0.000329
+  }
+ },
+ "grid_agreement": {
+  "preregistered_M4_minus_M3_m": -0.001337,
+  "amended_M4_minus_M3_m": -0.000618,
+  "aggregate_same_sign": true,
+  "per_athlete_sign": {
+   "P0001": {
+    "preregistered": -0.000581,
+    "amended": -0.000581,
+    "same_sign": true
+   },
+   "P0002": {
+    "preregistered": -0.00319,
+    "amended": -0.007822,
+    "same_sign": true
+   },
+   "P0003": {
+    "preregistered": -0.000241,
+    "amended": 0.006548,
+    "same_sign": false
+   }
+  },
+  "consistent_in_every_athlete_under_both_grids": false,
+  "note": "The pre-registered result is primary and is NOT replaced. The amended grid is reported alongside it. If the two disagree in sign, that instability is the finding, not a reason to prefer one."
+ },
+ "aggregation_rule": "the unweighted MEAN OF THE THREE ATHLETE MEANS",
+ "not_claimed": "Predictive incremental value only. No physical explanation, no causal claim, no coaching recommendation. Three development athletes do not establish uncertainty over future athletes."
+}

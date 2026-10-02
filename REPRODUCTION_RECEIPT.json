@@ -1,0 +1,152 @@
+{
+  "schema": "sloan.e1.reproduction_receipt.v1",
+  "verified_utc": "2026-10-01T20:26:27.150660+00:00",
+  "scope": "historical three-athlete E1; no protected cohort or new physical reference",
+  "source_extraction_zip_sha256": "c7dedf36e07f2ebf4d9ce6f15c403442bab0190f6bad61192124ae8b36db1076",
+  "environment": {
+    "schema": "sloan.e1.local_environment.v1",
+    "python": "3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.1",
+    "torch": "2.14.0+cpu",
+    "pytest": "9.1.1",
+    "installation_command": "uv sync --locked --no-install-project --extra dev --extra cpu --python 3.12",
+    "installation_exit_code": 0,
+    "public_tests": {
+      "command": "python -B -m pytest tests/ -q -p no:cacheprovider",
+      "passed": 630,
+      "deselected": 3,
+      "duration_seconds": 48.02,
+      "exit_code": 0
+    },
+    "uv_lock_sha256": "9010ccc0e7610375e4d45333ebfff29012c1b9a02e806b787a2587e1ac1ac203"
+  },
+  "public_acquisition": {
+    "command": "python fetch_data.py; python fetch_data.py --verify-only",
+    "exit_code": 0,
+    "files_downloaded_anonymously": 396,
+    "files_verified_offline": 396,
+    "all_match_archive_inputs_used_for_fresh_refit": true,
+    "source_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+    "manifest_sha256": "22fabc5f536e48cd0d035f1ddde3bf89b68e5754a85359979a9967e85e26a42e",
+    "allowed_session_participant_counts": {
+      "2024-08-28/P0001": 125,
+      "2025-12-18/P0001": 88,
+      "2025-12-18/P0002": 93,
+      "2025-12-18/P0003": 90
+    },
+    "public_tests_on_downloaded_inputs": {
+      "passed": 630,
+      "deselected": 3,
+      "exit_code": 0,
+      "duration_seconds": 43.29
+    }
+  },
+  "source_profile": {
+    "command": "python -B -m pytest -c pytest-source.ini -q -p no:cacheprovider",
+    "passed": 649,
+    "deselected": 12,
+    "exit_code": 0
+  },
+  "full_reproduction": {
+    "command": "python reproduce.py",
+    "exit_code": 0,
+    "fresh_fits": true,
+    "experiment_and_baselines_match": true,
+    "stratum_reports_matched": 6,
+    "trial_cluster_interval_blocks_matched": 6,
+    "full_log_sha256": "2d0d34fa6685e68dc32e53489c43e4f7037bff30823eb8750f7fc31ce1a46efb",
+    "comparison_omits": [
+      "store",
+      "data_root",
+      "store_manifest_sha256",
+      "analysis_identity",
+      "generated_at"
+    ],
+    "independent_source_and_input_hash_checks": true
+  },
+  "fresh_fit_replay": {
+    "status": "REPLAYED",
+    "contract_digest": "b0a8399d6d6acd61b5f4f660556a7ddc47821f356610579d4df3d1c577eeb141",
+    "forecasts_checked": 57714,
+    "max_abs_difference_m": 6.394884621840902e-14,
+    "tolerance_m": 1e-09,
+    "refitted": false,
+    "aggregate_mean_of_athlete_means_m_from_store": {
+      "amended_RS_A2.M3": 0.16138,
+      "amended_RS_A2.M3b": 0.16171,
+      "amended_RS_A2.M4": 0.16076,
+      "preregistered.M3": 0.15986,
+      "preregistered.M3b": 0.15949,
+      "preregistered.M4": 0.15853
+    },
+    "counts": {
+      "intended": 14594,
+      "input_eligible": 9619,
+      "emitted": 57714,
+      "reference_available": 9619,
+      "paired_scoreable": 57714,
+      "m4_unavailable": 4975,
+      "feature_unavailable": 0
+    },
+    "reconciliation_with_accepted_report": {
+      "preregistered.M3": {
+        "report": 0.15986,
+        "from_store": 0.15986,
+        "equal": true
+      },
+      "preregistered.M3b": {
+        "report": 0.15949,
+        "from_store": 0.15949,
+        "equal": true
+      },
+      "preregistered.M4": {
+        "report": 0.15853,
+        "from_store": 0.15853,
+        "equal": true
+      },
+      "amended_RS_A2.M3": {
+        "report": 0.16138,
+        "from_store": 0.16138,
+        "equal": true
+      },
+      "amended_RS_A2.M3b": {
+        "report": 0.16171,
+        "from_store": 0.16171,
+        "equal": true
+      },
+      "amended_RS_A2.M4": {
+        "report": 0.16076,
+        "from_store": 0.16076,
+        "equal": true
+      }
+    },
+    "reconciles": true
+  },
+  "not_established": [
+    "new-athlete generalization",
+    "physical tracking accuracy",
+    "live performance",
+    "causal coaching benefit",
+    "venue acceptance of linked data",
+    "conference submission"
+  ],
+  "test_portability_correction": {
+    "initial_linux_ci_run": 36922063486,
+    "initial_linux_result": {
+      "passed": 645,
+      "failed": 4,
+      "deselected": 12
+    },
+    "cause": "two inherited fixtures patched global subprocess.check_output; first Linux Matplotlib font query expected bytes",
+    "new_regression_tests": 2,
+    "regression_red_observed": true,
+    "affected_modules_after_fix": {
+      "passed": 36,
+      "deselected": 2,
+      "exit_code": 0
+    },
+    "scientific_runtime_unchanged": true
+  }
+}

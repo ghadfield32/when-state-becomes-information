@@ -1,0 +1,19 @@
+data/external/
+**/data/external/
+outputs/
+**/outputs/
+outputs_private/
+__pycache__/
+**/__pycache__/
+*.pyc
+.venv/
+**/.venv/
+
+# Private input and local validation surfaces
+spl_data/*.tar.gz
+.pytest_cache/
+**/.pytest_cache/
+.test-tmp/
+.env
+.env.*
+*.log

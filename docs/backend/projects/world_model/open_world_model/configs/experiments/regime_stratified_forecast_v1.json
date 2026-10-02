@@ -1,0 +1,36 @@
+{
+  "packet": "OW-REGIME-18",
+  "question": "On development prefixes admitted by the unchanged baseline rule, does a prefix-only fit preference (gravity-only line vs OLS line, equal parameters) separate groups whose short-horizon forecasts behave differently, and how do persistence, OLS velocity and gravity-only continuation compare within each group at 50/100/200 ms? Prefix-only use of supplied (possibly processed) tracks; no causal-pipeline or physical-accuracy claim.",
+  "task_card": "docs/backend/projects/world_model/open_world_model/RUNDOC.md#frozen-task-card--ow-regime-18",
+  "data_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+  "inventory_sha256": "acf8238d98c8296af5d7894a329a4f02e14a81c1002821bf0d45d25830a34c47",
+  "participants": ["P0001", "P0002", "P0003"],
+  "not_opened": {"P0004": "historically consulted validation participant; the task card allows one consultation only after this development decision is frozen, which is NOT part of this packet", "P0005": "locked test participant"},
+  "expected_trials": 396,
+  "expected_eligible_prefixes": 315,
+  "eligibility": "unchanged baseline run_prefix_forecast.fit_prefix and target_index",
+  "horizons_s": [0.05, 0.1, 0.2],
+  "gravity_m_s2": 9.81,
+  "vertical_axis_index": 2,
+  "indicator": {
+    "field": "gravity_consistent",
+    "meaning": "gravity preferred over the line on this prefix: fit_gravity_ballistic_segment RMSE strictly below the OLS constant-velocity RMSE, both 6 parameters, 3-D RMSE over exactly the finite prefix samples fit_prefix admits; ties are not gravity_consistent",
+    "not_a": "release label, contact/no-contact classification, or certification of ideal-gravity physics: for noise-free vertical acceleration a the preference holds whenever a < -g/2 (about -4.905 m/s^2)",
+    "values": ["gravity_consistent", "not_gravity_consistent"]
+  },
+  "candidates": {
+    "persistence": "unchanged OW-PREFIX-07: last admitted prefix observation",
+    "velocity": "unchanged OW-PREFIX-07: OLS intercept at the cutoff plus velocity times (target time - cutoff)",
+    "gravity": "fit_gravity_ballistic_segment on the admitted prefix samples, predicted at the native target time; role 'mismatched_comparator' in the not_gravity_consistent group, 'candidate' otherwise"
+  },
+  "freeze": "per-trial prefix fits, indicator, native target times and all predictions are written to frozen_predictions.json and hashed before any reference position is read for scoring; the hash is re-checked after scoring",
+  "retrospective_agreement": {
+    "source": "reports/world_model/v1_2/regime17/retained/run_manifest.json.gz",
+    "source_original_sha256": "36ff6a0c410991dd27c5dd458f63cf84fa55c3d1652cc5ef9ffb9824b848a725",
+    "mapping": "future_gravity_preferred if OW-REGIME-17 rmse_gravity_m < rmse_constant_velocity_m; future_line_preferred if both present and not smaller; future_undefined if either is missing",
+    "label": "prefix-versus-future fit-preference agreement (retrospective diagnostic; never used to choose predictions, groups, thresholds or cutoffs)"
+  },
+  "metrics": "3-D Euclidean error (m) against the first native target at or after each horizon; mean, median, p90 and n by participant/session x indicator x horizon x candidate, and overall by indicator; per-trial paired differences velocity-persistence, gravity-velocity, gravity-persistence; requested and actual target time retained; empty groups are undefined (null), never zero",
+  "examples": "deterministic: for each participant/session x indicator with n>0, the trial with the median 200 ms velocity error (representative) and the one with the maximum 200 ms velocity error (failure), ties broken by path",
+  "not_claimed": ["release detection", "free-flight or contact label", "physical accuracy", "uncertainty qualification", "transfer to owned video", "causal live pipeline"]
+}

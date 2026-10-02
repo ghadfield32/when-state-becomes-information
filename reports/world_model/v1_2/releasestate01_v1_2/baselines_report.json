@@ -1,0 +1,99 @@
+{
+ "status": "COMPLETE_RELEASE_STATE_BASELINES",
+ "packet": "OW-RELEASE-STATE-01-v1_2",
+ "protocol_scientific_digest": "b0a8399d6d6acd61b5f4f660556a7ddc47821f356610579d4df3d1c577eeb141",
+ "population": "finger_available",
+ "horizon_ms": 100,
+ "scored_examples": 9619,
+ "baselines": {
+  "held_position": {
+   "pooled": {
+    "n": 9619,
+    "mean_m": 0.27801,
+    "median_m": 0.25669,
+    "p90_m": 0.57282
+   },
+   "by_athlete": {
+    "P0001": {
+     "n": 3095,
+     "mean_m": 0.32506,
+     "median_m": 0.28948,
+     "p90_m": 0.60718
+    },
+    "P0002": {
+     "n": 3315,
+     "mean_m": 0.24452,
+     "median_m": 0.22476,
+     "p90_m": 0.51484
+    },
+    "P0003": {
+     "n": 3209,
+     "mean_m": 0.26721,
+     "median_m": 0.27788,
+     "p90_m": 0.56566
+    }
+   },
+   "unavailable": 0
+  },
+  "constant_velocity": {
+   "pooled": {
+    "n": 9619,
+    "mean_m": 0.149,
+    "median_m": 0.06145,
+    "p90_m": 0.25573
+   },
+   "by_athlete": {
+    "P0001": {
+     "n": 3095,
+     "mean_m": 0.2399,
+     "median_m": 0.07107,
+     "p90_m": 0.37164
+    },
+    "P0002": {
+     "n": 3315,
+     "mean_m": 0.10912,
+     "median_m": 0.06141,
+     "p90_m": 0.22071
+    },
+    "P0003": {
+     "n": 3209,
+     "mean_m": 0.10253,
+     "median_m": 0.05554,
+     "p90_m": 0.21462
+    }
+   },
+   "unavailable": 0
+  },
+  "quadratic_prefix": {
+   "pooled": {
+    "n": 9619,
+    "mean_m": 0.20764,
+    "median_m": 0.12091,
+    "p90_m": 0.45131
+   },
+   "by_athlete": {
+    "P0001": {
+     "n": 3095,
+     "mean_m": 0.29431,
+     "median_m": 0.15189,
+     "p90_m": 0.70743
+    },
+    "P0002": {
+     "n": 3315,
+     "mean_m": 0.18405,
+     "median_m": 0.13629,
+     "p90_m": 0.38441
+    },
+    "P0003": {
+     "n": 3209,
+     "mean_m": 0.14843,
+     "median_m": 0.07138,
+     "p90_m": 0.38454
+    }
+   },
+   "unavailable": 0
+  }
+ },
+ "note": "quadratic_prefix estimates its curvature from the prefix; it is NOT a gravity model, because a ball still accelerated by the hand is not in free flight.",
+ "not_claimed": "No M3/M4 model is fitted here. These are the floor those models must beat."
+}

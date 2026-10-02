@@ -1,0 +1,135 @@
+{
+  "_about": "Complete tracked-artifact publication inventory for E1. One entry per tracked file or per explicitly enumerated file group. Answers, for every artifact: origin, raw/derived, whether it is needed for the promised reproduction, whether it carries participant- or source-level content, the disposition, and why. Nothing here grants or implies a right to redistribute SPL material.",
+  "inventory_version": "2026-10-01",
+  "paper": "When State Becomes Information: Release-Conditioned Basketball Forecasting",
+  "counts": {
+    "tracked_files_total": 106,
+    "gitlinks": 0,
+    "participant_archives_bundled": 0,
+    "per_sample_tracking_rows_bundled": 0,
+    "count_rule": "tracked_files_total = git ls-files | count (recomputed at the submission tag)."
+  },
+  "disposition_vocabulary": {
+    "PUBLIC_ORIGINAL": "original WMS material, MIT code licence or authored document",
+    "PUBLIC_DERIVED": "aggregate result derived from SPL data; distributed under CC BY-NC-SA 4.0 with the upstream exclusion preserved",
+    "PUBLIC_PINNED_ACQUISITION": "no bytes bundled; fetched from the pinned upstream revision and hash-verified",
+    "PRIVATE_ONLY": "never tracked in the public repository"
+  },
+
+  "entries": [
+    {
+      "group": "original WMS code",
+      "origin": "World Model Sports LLC",
+      "raw_or_derived": "ORIGINAL",
+      "needed_for_reproduction": true,
+      "contains_participant_data": false,
+      "disposition": "PUBLIC_ORIGINAL",
+      "reason": "MIT-licensed code. Required to fetch inputs and reproduce.",
+      "files": [
+        "fetch_data.py",
+        "unpack_data.py",
+        "reproduce.py",
+        "pytest-source.ini",
+        "tests/",
+        "docs/backend/projects/world_model/open_world_model/scripts/",
+        "docs/backend/projects/world_model/open_world_model/src/",
+        "docs/backend/projects/world_model/open_world_model/tests/",
+        "docs/backend/projects/world_model/open_world_model/pyproject.toml",
+        "docs/backend/projects/world_model/open_world_model/uv.lock",
+        "docs/backend/projects/world_model/open_world_model/configs/"
+      ]
+    },
+    {
+      "group": "pinned acquisition metadata",
+      "origin": "filtered from the SPL observation inventory by WMS",
+      "raw_or_derived": "METADATA",
+      "needed_for_reproduction": true,
+      "contains_participant_data": false,
+      "disposition": "PUBLIC_ORIGINAL",
+      "reason": "Contains only each admitted file's relative path and original SHA-256 plus schema and source provenance. No observations, coordinates, or other participants' rows.",
+      "files": ["spl_data/UPSTREAM_FILES.json", "spl_data/SHA256SUMS", "spl_data/SPL_REVISION.txt"]
+    },
+    {
+      "group": "upstream licence and attribution, carried unchanged",
+      "origin": "MLSE / Sport Performance Lab",
+      "raw_or_derived": "THIRD_PARTY_DOCUMENT",
+      "needed_for_reproduction": false,
+      "contains_participant_data": false,
+      "disposition": "PUBLIC_PINNED_ACQUISITION",
+      "reason": "Preserved verbatim so the terms travel with the package. Not modified.",
+      "files": ["spl_data/SPL_LICENSE.txt", "spl_data/SPL_README.md"]
+    },
+    {
+      "group": "SPL motion-capture trials",
+      "origin": "SPL Open Data (MLSE), pinned revision a3f9cffb…",
+      "raw_or_derived": "RAW_THIRD_PARTY",
+      "needed_for_reproduction": true,
+      "contains_participant_data": true,
+      "disposition": "PUBLIC_PINNED_ACQUISITION",
+      "reason": "**No bytes are bundled.** 396 files across four directories are fetched on demand from the pinned upstream revision and hash-verified. Bundling raw participant archives would change the rights position and is not done.",
+      "files_glob": "docs/backend/projects/world_model/open_world_model/data/external/SPL-Open-Data/** (fetched, never committed)"
+    },
+    {
+      "group": "frozen aggregate reports and figures",
+      "origin": "World Model Sports LLC, computed from SPL data",
+      "raw_or_derived": "DERIVED",
+      "needed_for_reproduction": false,
+      "contains_participant_data": "aggregate only; no per-sample rows",
+      "disposition": "PUBLIC_DERIVED",
+      "reason": "Six stratum reports, experiment and baseline reports, interval analysis, and two figures. Distributed under CC BY-NC-SA 4.0 with the upstream exclusion preserved.",
+      "files_glob": "reports/world_model/v1_2/**"
+    },
+    {
+      "group": "authored documents",
+      "origin": "World Model Sports LLC",
+      "raw_or_derived": "ORIGINAL",
+      "needed_for_reproduction": false,
+      "contains_participant_data": false,
+      "disposition": "PUBLIC_ORIGINAL",
+      "reason": "Manuscript, abstract, provenance, rights, review and release documentation.",
+      "files": [
+        "README.md",
+        "abstract.md",
+        "abstract.txt",
+        "abstract.pdf",
+        "DATA.md",
+        "DATA_INVENTORY.json",
+        "CLAIM_LEDGER.md",
+        "PRIOR_WORK.md",
+        "RIGHTS.md",
+        "THIRD_PARTY_NOTICES.md",
+        "REVIEW.md",
+        "VALIDATION.md",
+        "TESTING.md",
+        "PUBLICATION.md",
+        "SUBMISSION_CHECKLIST.md",
+        "RELEASE_STATUS.yaml",
+        "PUBLICATION_DECISION.md",
+        "RELEASE_CANDIDATE.json",
+        "REPRODUCTION_RECEIPT.json",
+        "LICENSE",
+        "CITATION.cff",
+        "CONTRIBUTING.md",
+        "SOURCE_MANIFEST.json",
+        "AUTHORS.json"
+      ]
+    }
+  ],
+
+  "private_only_never_tracked": [
+    { "category": "raw SPL trial JSON files", "reason": "fetched from pinned upstream, never committed" },
+    { "category": "participant archives and per-sample coordinates", "reason": "third-party raw content" },
+    { "category": "fitted forecast stores and per-example derived arrays", "reason": "regenerated by reproduce.py; not bundled" },
+    { "category": "P0004 / P0005 and any other participant", "reason": "outside the frozen three-athlete scope" },
+    { "category": "the private preservation archive and monorepo", "reason": "kept off-repository" },
+    { "category": "credentials, tokens, secrets, local environments", "reason": "never tracked" },
+    { "category": "absolute local filesystem paths", "reason": "never tracked; verified absent" }
+  ],
+
+  "operator_summary": {
+    "bundled_participant_data": "none",
+    "reproduction_route": "deterministic linked acquisition from a pinned upstream revision, 396 files, per-file SHA-256 verified",
+    "cleaner_than_pmi": "PMI bundles derived NBA.com tables; E1 bundles no participant data at all and fetches only from a pinned public upstream revision",
+    "open_question": "whether the venue accepts linked acquisition as satisfying 'data in the repo' — a venue-interpretation question this package states but does not resolve"
+  }
+}

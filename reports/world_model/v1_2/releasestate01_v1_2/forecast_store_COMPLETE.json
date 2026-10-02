@@ -1,0 +1,35 @@
+{
+ "status": "COMPLETE",
+ "counts": {
+  "intended": 14594,
+  "input_eligible": 9619,
+  "emitted": 57714,
+  "reference_available": 9619,
+  "paired_scoreable": 57714,
+  "m4_unavailable": 4975,
+  "feature_unavailable": 0
+ },
+ "forecasts_sha256": "2a45be1d08e0c8c337f555ca6c4ac7e067206d21763b1f711f667f936ea7b601",
+ "forecasts_bytes": 20708894,
+ "manifest_sha256": "0390d686e931747871f997a1bd6da047b661e0db636be5897aa2b8a76a98de1c",
+ "fitted_artifacts": {
+  "amended_RS_A2.M3.P0001": "2ac8ca3ffcf910e57d68191bb4950e5abc0e22c29bbfb012034e0095f19b6fb0",
+  "amended_RS_A2.M3.P0002": "2858efd2b93ea2158c625a02d6768f0eafdac5afbbbf1ab59b6a405c646ac952",
+  "amended_RS_A2.M3.P0003": "eb55f659043f2df4bfec611e3b57d48a0898cf1b4f98e1e6469a77c3040574c6",
+  "amended_RS_A2.M3b.P0001": "ff8e495657c0ea28d29cd74068723af023c183a00918e652e3c0b5a427db6a55",
+  "amended_RS_A2.M3b.P0002": "ebbbe1e91b19e7fd78c3d9339ac58da37813fb2bc0c2eeb5260f1b0619b923ce",
+  "amended_RS_A2.M3b.P0003": "a46629081d98ba2deaa337372afa4446fabd275e08ec549a372c520e33caabe5",
+  "amended_RS_A2.M4.P0001": "7e5992be3680d2c3fbaf479247038d5cf423a7583b998e6216fa887c59ff9834",
+  "amended_RS_A2.M4.P0002": "a41a842051c695f3f20ba0357d6b9f4edc3053676c524071ab8c5b41f2048830",
+  "amended_RS_A2.M4.P0003": "291aad8827c922ebce089a9270590931f8aaedf6e2e80ea696da441ed7eb9d4b",
+  "preregistered.M3.P0001": "b73e79751074fbcbbdd748df080e1625e70eabb085e038b23823eaf4c76654e8",
+  "preregistered.M3.P0002": "a53820c38c2fe97ed1920d6ce6efb43c73a11c6698c82573c5dc974c434af0d7",
+  "preregistered.M3.P0003": "0d9d17221eef3a8f1568e1b009a1bf892b1cd5e30e0f5e6c1027eca5e2eaa2ef",
+  "preregistered.M3b.P0001": "6231dadc343239d83f65ad38e7965507b4d6fb2282edd32744a33c4eda5505db",
+  "preregistered.M3b.P0002": "23b6c047e8c6d56ad44def11ab5028dd19c1c2d967bb589b469446a5602d2e8c",
+  "preregistered.M3b.P0003": "0a9c8e6fe9d3512c6ade5bf4b0ad10a5230d10830aa85e40d69e6955d6fef4e6",
+  "preregistered.M4.P0001": "7d32c15a95ef0d55fcebe009a60cf1fd1005da8b29ff55fee304bf7e5afdae39",
+  "preregistered.M4.P0002": "4fd8e5bcd3edbe8ceb1883896debf3a419f83d529e89577f0e665aef3a8f360e",
+  "preregistered.M4.P0003": "b0db2c0fb5823b94f4156c7c57b936832a6c434a794533546d861e5fd52afecd"
+ }
+}

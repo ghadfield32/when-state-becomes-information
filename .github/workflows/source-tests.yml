@@ -1,0 +1,57 @@
+name: Source checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      full_reproduction:
+        description: "Fetch the 396 pinned E1 inputs and refit the historical results"
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          version: "0.12.5"
+      - name: Install frozen CPU environment
+        working-directory: docs/backend/projects/world_model/open_world_model
+        run: uv sync --locked --no-install-project --extra dev --extra cpu --python 3.12
+      - name: Check package hashes
+        run: sha256sum --check SHA256SUMS
+      - name: Source-only tests
+        run: docs/backend/projects/world_model/open_world_model/.venv/bin/python -m pytest -c pytest-source.ini -q
+      - name: Frozen protocol
+        working-directory: docs/backend/projects/world_model/open_world_model
+        run: .venv/bin/python scripts/validate_release_state_protocol.py configs/experiments/release_state_v1_2.json
+  reproduction:
+    if: github.event_name == 'workflow_dispatch' && inputs.full_reproduction
+    needs: source
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          version: "0.12.5"
+      - name: Install frozen CPU environment
+        working-directory: docs/backend/projects/world_model/open_world_model
+        run: uv sync --locked --no-install-project --extra dev --extra cpu --python 3.12
+      - name: Check package hashes
+        run: sha256sum --check SHA256SUMS
+      - name: Acquire only the pinned E1 inputs
+        run: docs/backend/projects/world_model/open_world_model/.venv/bin/python fetch_data.py
+      - name: Full public data tests
+        working-directory: docs/backend/projects/world_model/open_world_model
+        run: .venv/bin/python -m pytest tests/ -q
+      - name: Refit and reconcile all historical results
+        run: docs/backend/projects/world_model/open_world_model/.venv/bin/python reproduce.py

@@ -1,0 +1,44 @@
+{
+  "packet": "OW-EVENT-21",
+  "question": "With the forecast cutoff placed at the causal release event (OW-EVENT-20 detector) instead of the fixed 2.0 s wall-clock cutoff, how do persistence, OLS velocity and gravity-only continuation compare at 50/100/200 ms within each development participant/session, and is the ranking between candidates more consistent across participants/sessions than at the fixed cutoff on the same trials?",
+  "evidence_class": "development only. P0001-P0003 shaped the OW-EVENT-20 detector and its noncausal post-event fits on these trials were already seen (gravity preferred over constant velocity in 11/88, 22/93, 42/90 of the 2025 windows), so this is neither blind nor confirmatory. A confirmatory claim needs newly captured data: P0004's one consultation is spent and P0005 stays locked.",
+  "data_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+  "inventory_sha256": "acf8238d98c8296af5d7894a329a4f02e14a81c1002821bf0d45d25830a34c47",
+  "participants": ["P0001", "P0002", "P0003"],
+  "not_opened": {"P0004": "its one permitted consultation was spent in OW-REGIME-19", "P0005": "locked test participant"},
+  "expected_trials": 396,
+  "groups": ["2024-08-28/P0001", "2025-12-18/P0001", "2025-12-18/P0002", "2025-12-18/P0003"],
+  "event_detector": {
+    "config": {"path": "configs/experiments/event_release_feasibility_v1.json", "sha256": "78cebaecd811c7af6e69eff797026662f83eb5c4857fd5faf4398c035d1d4bc2"},
+    "rule": "OW-EVENT-20 detect_release unchanged (2r contact boundary, 1.6-frame gap, 200 ms ascending window, integer milliseconds, hand keypoints and ball from its load_inputs). The event sample is shifted onto the baseline cutoff (2.0 s) by integer-millisecond arithmetic."
+  },
+  "event20_reproduction": {
+    "manifest": {"path": "reports/world_model/v1_2/event20/retained/run_manifest.json.gz", "original_sha256": "9b1dbfdafa8665e8aa627184887c315bea06934ffc2b0612c25d9383f6376d03"},
+    "rule": "every trial's event status and event_time_s, and every event-anchored prefix status, must equal OW-EVENT-20's retained row exactly or the run blocks"
+  },
+  "candidates": {
+    "config": {"path": "configs/experiments/regime_stratified_forecast_v1.json", "sha256": "9dcc338f5d1c6c177ffc239fced01250f915a425a6447c8b7b1631c912822fe0"},
+    "rule": "OW-REGIME-18 freeze_trial and score_trial unchanged: persistence (last admitted prefix sample), velocity (OLS intercept at the cutoff plus velocity times (target time - cutoff)), gravity (fit_gravity_ballistic_segment on the admitted prefix, predicted at the native target time). Eligibility is the unchanged baseline fit_prefix/target_index. No new candidate, threshold, switch or learned model."
+  },
+  "arms": {
+    "event": "the candidates frozen on the event-shifted time axis",
+    "fixed": "the same candidates frozen on OW-REGIME-17's load_trial time axis (fixed 2.0 s cutoff), recomputed from the data in this run"
+  },
+  "regime18_reproduction": {
+    "manifest": {"path": "reports/world_model/v1_2/regime18/retained/run_manifest.json.gz", "original_sha256": "f5abf4430dfdb1bf11f7211b2f69c46b4dc7d64fa831b02cd89077702f33f054"},
+    "rule": "every fixed-arm prefix status, the set of scored horizons and every per-horizon candidate error must equal OW-REGIME-18's retained row exactly or the run blocks"
+  },
+  "horizons_s": [0.05, 0.1, 0.2],
+  "contrasts": [["velocity", "persistence"], ["gravity", "velocity"], ["gravity", "persistence"]],
+  "freeze": "both arms' prefix fits, native target times and predictions for every trial are written to frozen_predictions.json and hashed before any reference position is read for scoring; the hash is re-checked after scoring",
+  "metrics": "3-D Euclidean error (m) against the supplied track at the first native sample at or after each horizon (within one frame). Per arm x view x group x horizon: n, target-unavailability reasons, mean/median/p90 per candidate, and per contrast the mean/median/p90 of the per-trial paired difference with a percentile bootstrap 95% CI of the mean over trials. Empty cells are null, never zero.",
+  "views": {"all": "every trial scored in that arm at that horizon", "common": "trials scored in both arms at that horizon, so the two anchors are compared on identical trials"},
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20260914,
+  "label_rule": "per contrast a_minus_b: a_lower if the CI upper bound is below 0; b_lower if the CI lower bound is above 0; not_separated otherwise; undefined if n = 0. Labels describe these development trials; they are not population decisions.",
+  "consistency_rule": "per arm x view x horizon x contrast: consistent if all four participant/session groups carry the same defined label, otherwise inconsistent. Key reported quantity (fixed before scoring): gravity_minus_velocity at 200 ms in the common view, for both arms, with the per-group means and intervals.",
+  "cohort_accounting": "per arm x horizon, wms.evaluation.evidence_contracts.reconcile_cohort accounts for all 396 trials exactly once: accepted = scored; rejected = event, prefix or target status",
+  "examples": "per participant/session in the event arm: the trial with the lower-median 200 ms velocity error (representative) and the one with the maximum (failure), ties broken by path; plotted as ball height against time since the event with the admitted prefix, all three predictions and the supplied reference",
+  "verification": "verify-retained checks digests, replays the frozen config, checks the freeze hash, re-scores every frozen prediction against the retained reference positions, rebuilds the summary and cohort accounting; with --data-root and --inventory it also re-derives every frozen row and reference from the pinned data",
+  "not_claimed": ["release ground truth", "free-flight label", "physical accuracy of supplied tracks", "uncertainty qualification", "population or unseen-athlete generalization", "transfer to owned video", "causal live pipeline"]
+}

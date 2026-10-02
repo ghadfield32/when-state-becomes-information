@@ -1,0 +1,84 @@
+{
+  "$comment": "Release-candidate identity for E1. The historical scientific tag is immutable and is NOT the submission identity; the submission tag points at a later release-documentation commit while the scientific source/manifest hashes remain those of the scientific tag. This distinction mirrors the RC/snapshot split used for PMI.",
+
+  "status": "REPOSITORY_PUBLIC_AWAITING_SUBMISSION_DECISION",
+
+  "identity": "E1",
+  "title": "When State Becomes Information: Release-Conditioned Basketball Forecasting",
+  "author": "Geoffrey Hadfield",
+  "affiliation": "World Model Sports LLC",
+  "contact_email": "geoff@worldmodelsports.com",
+
+  "historical_science_tag": "e1-2026-10-01",
+  "historical_science_commit": "9f4b38df3e1ffc577d670463ee5b74d4fbba7255",
+  "historical_science_note": "immutable. This is the reviewed scientific identity and its tag must not move.",
+
+  "submission_tag": null,
+  "submission_tag_note": "created at the submission boundary, after the governance layer is reviewed. The science hashes below remain those of the scientific tag.",
+
+  "public_remote": "https://github.com/ghadfield32/ssac27-release-conditioned-forecasting",
+  "public_branch": "main",
+
+  "bound_identities": {
+    "source_manifest": "SOURCE_MANIFEST.json",
+    "payload_checksums": "SHA256SUMS",
+    "spl_pinned_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+    "spl_manifest": "spl_data/UPSTREAM_FILES.json",
+    "spl_manifest_sha256": "22fabc5f536e48cd0d035f1ddde3bf89b68e5754a85359979a9967e85e26a42e",
+    "admitted_source_files": 396,
+    "environment_lock": "docs/backend/projects/world_model/open_world_model/uv.lock",
+    "environment_lock_sha256": "9010ccc0e7610375e4d45333ebfff29012c1b9a02e806b787a2587e1ac1ac203",
+    "environment_install": "uv sync --locked --no-install-project --extra dev --extra cpu --python 3.12"
+  },
+
+  "reproduction": {
+    "source_only_tests": "python -B -m pytest -c pytest-source.ini -q -p no:cacheprovider",
+    "acquisition": "python fetch_data.py; python fetch_data.py --verify-only",
+    "scientific": "python reproduce.py",
+    "receipt": "REPRODUCTION_RECEIPT.json",
+    "level": "fresh refit from pinned public inputs, not a stored-forecast replay",
+    "clean_room_verification_2026_10_01": {
+      "verified_by": "independent clean-room run from an anonymous clone of the public repository at tag e1-2026-10-01",
+      "source_only_tests": "651 passed, 12 deselected, exit 0 (run from the repository root; an earlier attempt from a narrower working directory collected 623, which is a collection-root difference, not a failure)",
+      "environment": "uv sync --locked --no-install-project --extra dev --extra cpu --python 3.12",
+      "acquisition": "396 files fetched from revision a3f9cffb and re-verified offline: 396 existing files verified, exit 0",
+      "reproduction": "reproduce.py exit 0 via a fresh refit; verify_release_state_forecasts.py status PASS",
+      "report_match": "all 6 regenerated release_stratum_report_*.json compare equal to the committed reports on every scientific field, excluding the documented plumbing keys (store, data_root, store_manifest_sha256, analysis_identity, generated_at)",
+      "independent_number_check": "every numeric claim in abstract.txt independently re-derived from the committed reports: whole-trial M4 +8.0 [-18.7,+23.8]; far-stratum M4 worse for all three athletes; near-stratum equal-athlete -73.0 [-79.4,-66.2]; per-athlete -115.7 / -118.2 / +14.9; M4-M3b -14.2 [-16.1,-12.4]; and 73.0 - 16.8 = 56.2 for the extrapolation-to-M3 share",
+      "note": "An earlier attempt of this verification produced four spurious failures because it used an improvised environment (no matplotlib/torch) instead of the documented lock. The receipt already documents that exact portability issue and its fix. All 651 tests pass under the documented environment."
+    }
+  },
+
+  "abstract_hashes": {
+    "abstract.md": "42adcb5310e6721e7e5eeffc360b224e4ed99492519f5362ae5844a3fa4bc5a1",
+    "abstract.txt": "1896a39dd02845996f57de3a927d058a17ac9879b9f9577bad250828b830dbb2",
+    "abstract.pdf": "fc2a82a8426c0cb6ca664f25542a1b596e7f64b3c2553374603aa175c1ac31f7"
+  },
+
+  "scope": {
+    "athletes": ["P0001", "P0002", "P0003"],
+    "included": "historical three-athlete E1 study",
+    "excluded": [
+      "five-athlete transfer",
+      "P0004 / P0005",
+      "direction study",
+      "left-hand sensitivity",
+      "JEPA / Bayesian / physics-informed challengers",
+      "physical tracking accuracy",
+      "live forecasting",
+      "make/miss",
+      "coaching benefit"
+    ]
+  },
+
+  "publication_decision": "REPOSITORY_PUBLIC_UNDER_OPERATOR_AUTHORIZATION",
+  "sloan_submitted": false,
+
+  "open_gates": [
+    "E1-G1_venue_interpretation_of_data_requirement",
+    "E1-G2_independent_review_of_governance_layer",
+    "E1-G3_sloan_submission_not_made"
+  ],
+
+  "caveat": "The 2026-10-01 governance artifacts are NOT covered by the three historical reviews recorded in REVIEW.md. They still need a read-only non-author review at the submission boundary."
+}

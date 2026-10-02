@@ -1,0 +1,18 @@
+{
+  "authors": [
+    {
+      "name": "Geoffrey Hadfield",
+      "affiliation": "World Model Sports LLC",
+      "role": "CEO/founder",
+      "email": "geoff@worldmodelsports.com"
+    }
+  ],
+  "source": "operator supplied 2026-10-01",
+  "corresponding_author": "Geoffrey Hadfield",
+  "paper_title": "When State Becomes Information: Release-Conditioned Basketball Forecasting",
+  "repository_url": "https://github.com/ghadfield32/ssac27-release-conditioned-forecasting",
+  "scientific_tag": "e1-2026-10-01",
+  "publication_cleared": true,
+  "submission_receipt": null,
+  "note": "Confirm paper-specific coauthors before the invited full paper. This abstract has a single author."
+}

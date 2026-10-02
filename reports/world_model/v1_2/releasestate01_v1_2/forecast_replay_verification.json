@@ -1,0 +1,59 @@
+{
+ "status": "REPLAYED",
+ "store": "<STORE_DIR>",
+ "contract_digest": "b0a8399d6d6acd61b5f4f660556a7ddc47821f356610579d4df3d1c577eeb141",
+ "forecasts_checked": 57714,
+ "max_abs_difference_m": 6.394884621840902e-14,
+ "tolerance_m": 1e-09,
+ "refitted": false,
+ "aggregate_mean_of_athlete_means_m_from_store": {
+  "amended_RS_A2.M3": 0.16138,
+  "amended_RS_A2.M3b": 0.16171,
+  "amended_RS_A2.M4": 0.16076,
+  "preregistered.M3": 0.15986,
+  "preregistered.M3b": 0.15949,
+  "preregistered.M4": 0.15853
+ },
+ "counts": {
+  "intended": 14594,
+  "input_eligible": 9619,
+  "emitted": 57714,
+  "reference_available": 9619,
+  "paired_scoreable": 57714,
+  "m4_unavailable": 4975,
+  "feature_unavailable": 0
+ },
+ "reconciliation_with_accepted_report": {
+  "preregistered.M3": {
+   "report": 0.15986,
+   "from_store": 0.15986,
+   "equal": true
+  },
+  "preregistered.M3b": {
+   "report": 0.15949,
+   "from_store": 0.15949,
+   "equal": true
+  },
+  "preregistered.M4": {
+   "report": 0.15853,
+   "from_store": 0.15853,
+   "equal": true
+  },
+  "amended_RS_A2.M3": {
+   "report": 0.16138,
+   "from_store": 0.16138,
+   "equal": true
+  },
+  "amended_RS_A2.M3b": {
+   "report": 0.16171,
+   "from_store": 0.16171,
+   "equal": true
+  },
+  "amended_RS_A2.M4": {
+   "report": 0.16076,
+   "from_store": 0.16076,
+   "equal": true
+  }
+ },
+ "reconciles": true
+}

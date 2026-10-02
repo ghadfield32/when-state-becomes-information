@@ -1,0 +1,555 @@
+{
+ "status": "COMPLETE_RELEASE_STRATUM",
+ "packet": "OW-RELEASE-STATE-01-v1_2-S1",
+ "grid": "preregistered",
+ "protocol_scientific_digest": "b0a8399d6d6acd61b5f4f660556a7ddc47821f356610579d4df3d1c577eeb141",
+ "store": "<STORE_DIR>",
+ "refitted": false,
+ "chronology": "The release event is RETROSPECTIVE: OW-EVENT-21's detector scans the whole trial. It is used ONLY to group already-issued forecasts. It did not select which decisions were issued and is not available in advance to a live system.",
+ "detector": {
+  "config": "event_release_feasibility_v1.json",
+  "rule": "a sample is evaluable when the ball and >= 1 hand keypoint are finite; contact means the evaluable min ball-hand distance <= boundary. Scan evaluable samples in time order. A transition is an evaluable sample beyond the boundary whose immediately preceding evaluable sample was in contact. The release event is the FIRST transition with: time gap to the preceding evaluable sample <= 1.6 native frames, and ascending: the OLS vertical velocity over finite ball samples in [t_i - history_s, t_i] (>= 3 samples) is > 0. Only samples at or before t_i are used (causal).",
+  "contact_boundary_radii": 2.0,
+  "history_s": 0.2
+ },
+ "near_ms": 100.0,
+ "strata_definition": {
+  "pre_release_far": "decision more than 100 ms before release",
+  "pre_release_near": "decision within 100 ms before release",
+  "post_release": "decision at or after the retrospective release proxy"
+ },
+ "analysis_identity": {
+  "config": "release_state_v1_2.json",
+  "config_sha256": "9ac3edb2d00900c89b1602e678903b4ccf8a1123d5f8c6ff5b1956bb70fc9e25",
+  "detector_config": "event_release_feasibility_v1.json",
+  "detector_config_sha256": "78cebaecd811c7af6e69eff797026662f83eb5c4857fd5faf4398c035d1d4bc2",
+  "detector_code_sha256": "894a8dcf81719feca426f4233a557780d8f28b4f7b68cbe053663c2d29bf93c6",
+  "stratifier_code_sha256": "e41855173f6659aa4d45240d596ab557c09fbddb66eeea9dd119d9224a038212",
+  "store_forecasts_sha256": "2a45be1d08e0c8c337f555ca6c4ac7e067206d21763b1f711f667f936ea7b601",
+  "store_manifest_sha256": "0390d686e931747871f997a1bd6da047b661e0db636be5897aa2b8a76a98de1c",
+  "store_counts": {
+   "intended": 14594,
+   "input_eligible": 9619,
+   "emitted": 57714,
+   "reference_available": 9619,
+   "paired_scoreable": 57714,
+   "m4_unavailable": 4975,
+   "feature_unavailable": 0
+  },
+  "near_ms": 100.0,
+  "grid": "preregistered"
+ },
+ "release_proxy": {
+  "contact_boundary_radii": 2.0,
+  "is_primary": true,
+  "role": "primary event definition"
+ },
+ "join_checks": {
+  "post_release": {
+   "families": [
+    "M3",
+    "M3b",
+    "M4",
+    "constant_velocity"
+   ],
+   "examples": 4974,
+   "duplicates": 0,
+   "orphans": 0
+  },
+  "pre_release_far": {
+   "families": [
+    "M3",
+    "M3b",
+    "M4",
+    "constant_velocity"
+   ],
+   "examples": 4382,
+   "duplicates": 0,
+   "orphans": 0
+  },
+  "pre_release_near": {
+   "families": [
+    "M3",
+    "M3b",
+    "M4",
+    "constant_velocity"
+   ],
+   "examples": 263,
+   "duplicates": 0,
+   "orphans": 0
+  }
+ },
+ "coverage": {
+  "post_release": {
+   "decisions": 4974,
+   "unique_trials": 271,
+   "decisions_by_athlete": {
+    "P0001": 1919,
+    "P0002": 1353,
+    "P0003": 1702
+   },
+   "unique_trials_by_athlete": {
+    "P0001": 88,
+    "P0002": 93,
+    "P0003": 90
+   }
+  },
+  "pre_release_far": {
+   "decisions": 4382,
+   "unique_trials": 262,
+   "decisions_by_athlete": {
+    "P0001": 1092,
+    "P0002": 1872,
+    "P0003": 1418
+   },
+   "unique_trials_by_athlete": {
+    "P0001": 84,
+    "P0002": 89,
+    "P0003": 89
+   }
+  },
+  "pre_release_near": {
+   "decisions": 263,
+   "unique_trials": 263,
+   "decisions_by_athlete": {
+    "P0001": 84,
+    "P0002": 90,
+    "P0003": 89
+   },
+   "unique_trials_by_athlete": {
+    "P0001": 84,
+    "P0002": 90,
+    "P0003": 89
+   }
+  }
+ },
+ "release_detection": {
+  "trials_with_event": 396,
+  "reasons": {
+   "event": 396
+  }
+ },
+ "forecasts_unlabelled_no_event": {},
+ "decision_offset_ms": {
+  "n": 28857,
+  "min": -2300.0,
+  "max": 3767.0,
+  "median": 34.0
+ },
+ "by_stratum": {
+  "post_release": {
+   "M3": {
+    "pooled": {
+     "n": 4974,
+     "mean_m": 0.227877,
+     "median_m": 0.162657,
+     "p90_m": 0.42283
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1919,
+      "mean_m": 0.266923,
+      "median_m": 0.147793,
+      "p90_m": 0.506968
+     },
+     "P0002": {
+      "n": 1353,
+      "mean_m": 0.169225,
+      "median_m": 0.130428,
+      "p90_m": 0.347141
+     },
+     "P0003": {
+      "n": 1702,
+      "mean_m": 0.230477,
+      "median_m": 0.198715,
+      "p90_m": 0.404919
+     }
+    },
+    "equal_athlete_mean_m": 0.222208
+   },
+   "M3b": {
+    "pooled": {
+     "n": 4974,
+     "mean_m": 0.226647,
+     "median_m": 0.160683,
+     "p90_m": 0.418565
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1919,
+      "mean_m": 0.263397,
+      "median_m": 0.145873,
+      "p90_m": 0.506103
+     },
+     "P0002": {
+      "n": 1353,
+      "mean_m": 0.170322,
+      "median_m": 0.129159,
+      "p90_m": 0.346317
+     },
+     "P0003": {
+      "n": 1702,
+      "mean_m": 0.229987,
+      "median_m": 0.197649,
+      "p90_m": 0.408724
+     }
+    },
+    "equal_athlete_mean_m": 0.221235
+   },
+   "M4": {
+    "pooled": {
+     "n": 4974,
+     "mean_m": 0.224552,
+     "median_m": 0.158205,
+     "p90_m": 0.420199
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1919,
+      "mean_m": 0.257609,
+      "median_m": 0.141199,
+      "p90_m": 0.499771
+     },
+     "P0002": {
+      "n": 1353,
+      "mean_m": 0.172441,
+      "median_m": 0.133325,
+      "p90_m": 0.338064
+     },
+     "P0003": {
+      "n": 1702,
+      "mean_m": 0.228705,
+      "median_m": 0.195705,
+      "p90_m": 0.416973
+     }
+    },
+    "equal_athlete_mean_m": 0.219585
+   },
+   "constant_velocity": {
+    "pooled": {
+     "n": 4974,
+     "mean_m": 0.219401,
+     "median_m": 0.077962,
+     "p90_m": 0.364483
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1919,
+      "mean_m": 0.332185,
+      "median_m": 0.083236,
+      "p90_m": 0.540439
+     },
+     "P0002": {
+      "n": 1353,
+      "mean_m": 0.148114,
+      "median_m": 0.073466,
+      "p90_m": 0.273903
+     },
+     "P0003": {
+      "n": 1702,
+      "mean_m": 0.148906,
+      "median_m": 0.078113,
+      "p90_m": 0.324575
+     }
+    },
+    "equal_athlete_mean_m": 0.209735
+   }
+  },
+  "pre_release_far": {
+   "M3": {
+    "pooled": {
+     "n": 4382,
+     "mean_m": 0.082157,
+     "median_m": 0.050056,
+     "p90_m": 0.189676
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1092,
+      "mean_m": 0.076781,
+      "median_m": 0.045922,
+      "p90_m": 0.131954
+     },
+     "P0002": {
+      "n": 1872,
+      "mean_m": 0.106822,
+      "median_m": 0.068324,
+      "p90_m": 0.221913
+     },
+     "P0003": {
+      "n": 1418,
+      "mean_m": 0.053735,
+      "median_m": 0.035836,
+      "p90_m": 0.126108
+     }
+    },
+    "equal_athlete_mean_m": 0.079113
+   },
+   "M3b": {
+    "pooled": {
+     "n": 4382,
+     "mean_m": 0.082897,
+     "median_m": 0.048517,
+     "p90_m": 0.190905
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1092,
+      "mean_m": 0.081113,
+      "median_m": 0.048739,
+      "p90_m": 0.137133
+     },
+     "P0002": {
+      "n": 1872,
+      "mean_m": 0.106217,
+      "median_m": 0.066762,
+      "p90_m": 0.224699
+     },
+     "P0003": {
+      "n": 1418,
+      "mean_m": 0.053484,
+      "median_m": 0.037758,
+      "p90_m": 0.117853
+     }
+    },
+    "equal_athlete_mean_m": 0.080272
+   },
+   "M4": {
+    "pooled": {
+     "n": 4382,
+     "mean_m": 0.083938,
+     "median_m": 0.05672,
+     "p90_m": 0.177542
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1092,
+      "mean_m": 0.0928,
+      "median_m": 0.070784,
+      "p90_m": 0.149055
+     },
+     "P0002": {
+      "n": 1872,
+      "mean_m": 0.099499,
+      "median_m": 0.069198,
+      "p90_m": 0.198285
+     },
+     "P0003": {
+      "n": 1418,
+      "mean_m": 0.056569,
+      "median_m": 0.047208,
+      "p90_m": 0.098619
+     }
+    },
+    "equal_athlete_mean_m": 0.082956
+   },
+   "constant_velocity": {
+    "pooled": {
+     "n": 4382,
+     "mean_m": 0.066179,
+     "median_m": 0.031033,
+     "p90_m": 0.133467
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 1092,
+      "mean_m": 0.08194,
+      "median_m": 0.051738,
+      "p90_m": 0.139014
+     },
+     "P0002": {
+      "n": 1872,
+      "mean_m": 0.076091,
+      "median_m": 0.046492,
+      "p90_m": 0.156435
+     },
+     "P0003": {
+      "n": 1418,
+      "mean_m": 0.040957,
+      "median_m": 0.022233,
+      "p90_m": 0.100234
+     }
+    },
+    "equal_athlete_mean_m": 0.066329
+   }
+  },
+  "pre_release_near": {
+   "M3": {
+    "pooled": {
+     "n": 263,
+     "mean_m": 0.141961,
+     "median_m": 0.11921,
+     "p90_m": 0.24175
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 84,
+      "mean_m": 0.086433,
+      "median_m": 0.073762,
+      "p90_m": 0.123392
+     },
+     "P0002": {
+      "n": 90,
+      "mean_m": 0.105282,
+      "median_m": 0.090771,
+      "p90_m": 0.178334
+     },
+     "P0003": {
+      "n": 89,
+      "mean_m": 0.231462,
+      "median_m": 0.234698,
+      "p90_m": 0.253147
+     }
+    },
+    "equal_athlete_mean_m": 0.141059
+   },
+   "M3b": {
+    "pooled": {
+     "n": 263,
+     "mean_m": 0.13944,
+     "median_m": 0.108526,
+     "p90_m": 0.246301
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 84,
+      "mean_m": 0.079417,
+      "median_m": 0.071783,
+      "p90_m": 0.10708
+     },
+     "P0002": {
+      "n": 90,
+      "mean_m": 0.099891,
+      "median_m": 0.085636,
+      "p90_m": 0.162607
+     },
+     "P0003": {
+      "n": 89,
+      "mean_m": 0.236084,
+      "median_m": 0.23723,
+      "p90_m": 0.259004
+     }
+    },
+    "equal_athlete_mean_m": 0.138464
+   },
+   "M4": {
+    "pooled": {
+     "n": 263,
+     "mean_m": 0.125186,
+     "median_m": 0.101564,
+     "p90_m": 0.223843
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 84,
+      "mean_m": 0.069543,
+      "median_m": 0.060439,
+      "p90_m": 0.091885
+     },
+     "P0002": {
+      "n": 90,
+      "mean_m": 0.091746,
+      "median_m": 0.076642,
+      "p90_m": 0.145042
+     },
+     "P0003": {
+      "n": 89,
+      "mean_m": 0.21152,
+      "median_m": 0.213198,
+      "p90_m": 0.229877
+     }
+    },
+    "equal_athlete_mean_m": 0.124269
+   },
+   "constant_velocity": {
+    "pooled": {
+     "n": 263,
+     "mean_m": 0.19754,
+     "median_m": 0.198352,
+     "p90_m": 0.220443
+    },
+    "by_athlete": {
+     "P0001": {
+      "n": 84,
+      "mean_m": 0.18523,
+      "median_m": 0.184819,
+      "p90_m": 0.212842
+     },
+     "P0002": {
+      "n": 90,
+      "mean_m": 0.209961,
+      "median_m": 0.207252,
+      "p90_m": 0.249098
+     },
+     "P0003": {
+      "n": 89,
+      "mean_m": 0.1966,
+      "median_m": 0.200059,
+      "p90_m": 0.214368
+     }
+    },
+    "equal_athlete_mean_m": 0.197263
+   }
+  }
+ },
+ "paired_M4_minus_M3_by_stratum": {
+  "post_release": {
+   "P0001": {
+    "n": 1919,
+    "mean_m": -0.009314,
+    "share_improved": 0.6087
+   },
+   "P0002": {
+    "n": 1353,
+    "mean_m": 0.003215,
+    "share_improved": 0.4523
+   },
+   "P0003": {
+    "n": 1702,
+    "mean_m": -0.001772,
+    "share_improved": 0.5711
+   },
+   "equal_athlete_mean_m": -0.002624
+  },
+  "pre_release_far": {
+   "P0001": {
+    "n": 1092,
+    "mean_m": 0.016019,
+    "share_improved": 0.293
+   },
+   "P0002": {
+    "n": 1872,
+    "mean_m": -0.007322,
+    "share_improved": 0.6693
+   },
+   "P0003": {
+    "n": 1418,
+    "mean_m": 0.002834,
+    "share_improved": 0.4175
+   },
+   "equal_athlete_mean_m": 0.003844
+  },
+  "pre_release_near": {
+   "P0001": {
+    "n": 84,
+    "mean_m": -0.016891,
+    "share_improved": 0.7976
+   },
+   "P0002": {
+    "n": 90,
+    "mean_m": -0.013536,
+    "share_improved": 0.7
+   },
+   "P0003": {
+    "n": 89,
+    "mean_m": -0.019942,
+    "share_improved": 0.9551
+   },
+   "equal_athlete_mean_m": -0.01679
+  }
+ },
+ "boundary_sensitivity_note": "Boundaries REUSE overlapping observations - a wider window contains a narrower one - so varying near_ms is a sensitivity check, never independent replication.",
+ "detector_coverage_note": "396/396 means a qualifying transition was found in every trial. It does NOT establish the instant of final fingertip contact: the rule is a geometric ball-hand boundary plus upward velocity.",
+ "live_use_note": "A live system may forecast before or after release. What it cannot have in advance is this retrospective LABEL; it belongs to evaluation, never to inference-time selection or routing.",
+ "not_claimed": "A stratum difference is an association within this corpus, not a mechanism. Per-athlete results must be read beside any aggregate: an equal-athlete mean can favour a model that loses for an individual athlete."
+}

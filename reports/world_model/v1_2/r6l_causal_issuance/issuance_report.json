@@ -1,0 +1,235 @@
+{
+ "coverage": {
+  "abstained": 5842,
+  "issued": 14998,
+  "opportunities": 20840,
+  "pending": 246,
+  "reasons": {
+   "abstained": {
+    "prefix_ball_incomplete": 4654,
+    "prefix_before_stream_start": 1188
+   },
+   "pending": {
+    "reference_window_not_elapsed": 246
+   },
+   "unscoreable": {
+    "reference_ball_missing": 158
+   }
+  },
+  "scored": 14594,
+  "unscoreable": 158
+ },
+ "coverage_by_athlete": {
+  "P0001": {
+   "abstained": 5231,
+   "issued": 8289,
+   "opportunities": 13520,
+   "pending": 81,
+   "reasons": {
+    "abstained": {
+     "prefix_ball_incomplete": 4592,
+     "prefix_before_stream_start": 639
+    },
+    "pending": {
+     "reference_window_not_elapsed": 81
+    },
+    "unscoreable": {
+     "reference_ball_missing": 138
+    }
+   },
+   "scored": 8070,
+   "unscoreable": 138
+  },
+  "P0002": {
+   "abstained": 312,
+   "issued": 3408,
+   "opportunities": 3720,
+   "pending": 81,
+   "reasons": {
+    "abstained": {
+     "prefix_ball_incomplete": 33,
+     "prefix_before_stream_start": 279
+    },
+    "pending": {
+     "reference_window_not_elapsed": 81
+    },
+    "unscoreable": {
+     "reference_ball_missing": 12
+    }
+   },
+   "scored": 3315,
+   "unscoreable": 12
+  },
+  "P0003": {
+   "abstained": 299,
+   "issued": 3301,
+   "opportunities": 3600,
+   "pending": 84,
+   "reasons": {
+    "abstained": {
+     "prefix_ball_incomplete": 29,
+     "prefix_before_stream_start": 270
+    },
+    "pending": {
+     "reference_window_not_elapsed": 84
+    },
+    "unscoreable": {
+     "reference_ball_missing": 8
+    }
+   },
+   "scored": 3209,
+   "unscoreable": 8
+  }
+ },
+ "coverage_by_session": {
+  "2024-08-28": {
+   "abstained": 4899,
+   "issued": 5101,
+   "opportunities": 10000,
+   "pending": 0,
+   "reasons": {
+    "abstained": {
+     "prefix_ball_incomplete": 4524,
+     "prefix_before_stream_start": 375
+    },
+    "pending": {},
+    "unscoreable": {
+     "reference_ball_missing": 126
+    }
+   },
+   "scored": 4975,
+   "unscoreable": 126
+  },
+  "2025-12-18": {
+   "abstained": 943,
+   "issued": 9897,
+   "opportunities": 10840,
+   "pending": 246,
+   "reasons": {
+    "abstained": {
+     "prefix_ball_incomplete": 130,
+     "prefix_before_stream_start": 813
+    },
+    "pending": {
+     "reference_window_not_elapsed": 246
+    },
+    "unscoreable": {
+     "reference_ball_missing": 32
+    }
+   },
+   "scored": 9619,
+   "unscoreable": 32
+  }
+ },
+ "e1_parity": {
+  "causal_cv_mean_m_by_athlete_on_e1_rows": {
+   "P0001": 0.2399030573577095,
+   "P0002": 0.10912124677818284,
+   "P0003": 0.10252829412149264
+  },
+  "causal_forecasts_in_e1_trials_not_in_e1": {
+   "by_e1_reason_and_later_outcome": {
+    "no_target_within_tolerance (m4 complete) | pending:reference_window_not_elapsed": 245,
+    "prefix_body_incomplete (m4 not evaluated) | pending:reference_window_not_elapsed": 1,
+    "target_ball_missing (m4 complete) | unscoreable:reference_ball_missing": 32
+   },
+   "by_e1_refusal_reason": {
+    "no_target_within_tolerance (m4 complete)": 245,
+    "prefix_body_incomplete (m4 not evaluated)": 1,
+    "target_ball_missing (m4 complete)": 32
+   },
+   "count": 278,
+   "future_dependent_and_m4_unavailable": 0,
+   "future_dependent_only": 277,
+   "other": 0,
+   "past_only": 1
+  },
+  "e1_cv_equal_athlete_mean_m": 0.15051753275246166,
+  "e1_cv_mean_m_by_athlete": {
+   "P0001": 0.2399030573577095,
+   "P0002": 0.10912124677818284,
+   "P0003": 0.10252829412149264
+  },
+  "e1_funnel": {
+   "feature_unavailable": 0,
+   "input_eligible": 9619,
+   "intended": 14594,
+   "m4_unavailable": 4975,
+   "reference_available": 9619
+  },
+  "e1_rows": 9619,
+  "e1_rows_off_causal_clock": 0,
+  "e1_trials": 271,
+  "joined_but_causally_abstained": 0,
+  "joined_but_not_scored": 0,
+  "joined_on_causal_clock": 9619,
+  "max_abs_error_difference_m": 0.0,
+  "max_abs_forecast_difference_m": 0.0,
+  "reading": "Each causal forecast E1 never held is listed under E1's OWN first refusal reason for that decision (mirrored from the builder and checked against build_trial per trial), with the prefix's finger completeness, and by what later happened to it. 'future_dependent_only' means a check that reads a later sample refused it AND E1's past-only finger population would have kept it."
+ },
+ "error": {
+  "by_athlete": {
+   "P0001": {
+    "mean_m": 0.17275519659366914,
+    "median_m": 0.0675013023095335,
+    "n": 8070,
+    "p90_m": 0.2784051966428264,
+    "p95_m": 0.5060389610588581
+   },
+   "P0002": {
+    "mean_m": 0.10912124677818284,
+    "median_m": 0.061412189629290556,
+    "n": 3315,
+    "p90_m": 0.22070665811086848,
+    "p95_m": 0.33290542332575773
+   },
+   "P0003": {
+    "mean_m": 0.10252829412149264,
+    "median_m": 0.05553868290010494,
+    "n": 3209,
+    "p90_m": 0.21462388154305911,
+    "p95_m": 0.3442976463720588
+   }
+  },
+  "equal_athlete_mean_m": 0.12813491249778156,
+  "pooled": {
+   "mean_m": 0.14285902873896508,
+   "median_m": 0.06216703803812207,
+   "n": 14594,
+   "p90_m": 0.24652884649860327,
+   "p95_m": 0.42031207077468086
+  }
+ },
+ "evaluation_policy": {
+  "evaluation_clock": "the latest available sample time of the stream (for an offline trial, its last sample)",
+  "outcomes": {
+   "pending": "the evaluation clock has not yet passed target_requested_ms + tolerance_ms",
+   "scored": "a reference exists within tolerance",
+   "unscoreable": "the tolerance window has passed with no usable reference (reason recorded)"
+  },
+  "policy": "nearest native sample to target_requested_ms within tolerance_ms, ties to the earlier sample; the reference must be strictly after the issue time and have a finite ball",
+  "tolerance_ms": 8
+ },
+ "identity": {
+  "config_sha256": "65e4d8ad0188ffaee30c8027dc744dc1b12782a937e825f7bfab8c8bd2069c1c",
+  "data_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+  "evaluation_sha256": "f14c61128697b611a754e870e6e7cefbd2186658764968c8948e6eceb34ab869",
+  "issuance_code_sha256": {
+   "src/wms/issuance/causal_state.py": "e2e2ed48ea489e853ab39dfc16302b7734b5221f569a8632907fe353426085c4",
+   "src/wms/issuance/issuer.py": "6607d436e3e6761254c43e3951f9bb4b099958a9ea78b16ae336dcc55a0a92e9",
+   "src/wms/issuance/journal.py": "dd553c571417183cdc609459e9a8243d404e75c7b55b4933f474e50a58960e0a",
+   "src/wms/issuance/stream.py": "ca067ec3f75e453b4a70c344a9e38f098164d31d61c84d4cfa4bb0c8dba3d51f"
+  },
+  "journal_sha256": "afa6a1d2394bc6e04b2e192fec30419f5012711b54bf9b4a0b37a5203931ef27"
+ },
+ "not_claimed": [
+  "live latency: availability is declared at zero, not measured",
+  "any accuracy improvement: this is the same constant-velocity forecaster E1 uses, issued causally",
+  "phase-aware issuance: prefix_phase_v1 is declared but not implemented"
+ ],
+ "packet": "OW-R6L-CAUSAL-ISSUANCE-01",
+ "reference_offset_ms_counts": {
+  "0": 14594
+ },
+ "status": "COMPLETE_CAUSAL_ISSUANCE_EVALUATION"
+}

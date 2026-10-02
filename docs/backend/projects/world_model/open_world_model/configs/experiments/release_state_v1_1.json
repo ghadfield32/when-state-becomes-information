@@ -1,0 +1,303 @@
+{
+ "packet": "OW-RELEASE-STATE-01-v1_1",
+ "question": "Does past-available hand and finger motion improve near-future ball prediction beyond a matched ball-and-body baseline, and can the same state representation forecast the supported hand/finger motion?",
+ "evidence_class": "development_only",
+ "frozen": "2026-09-21, before any model is fitted",
+ "data_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+ "participants": [
+  "P0001",
+  "P0002",
+  "P0003"
+ ],
+ "not_opened": {
+  "P0004": "never opened by this packet",
+  "P0005": "locked test participant"
+ },
+ "native_timing": {
+  "measured_2026_09_21": {
+   "2024-08-28": {
+    "declared_sampling_rate": 30,
+    "measured_median_dt_ms": 33.0,
+    "trials": 125
+   },
+   "2025-12-18": {
+    "declared_sampling_rate": 60,
+    "measured_median_dt_ms": 17.0,
+    "trials": 271
+   }
+  },
+  "primary_population_session": "2025-12-18",
+  "primary_population_dt_ms": 17.0,
+  "note": "The corpus is MIXED RATE. The scored finger-available population is the 60 Hz 2025-12-18 session. Durations below are declared in MILLISECONDS and converted to samples per trial from that trial's own measured interval, so a rate difference can never silently change a window length again."
+ },
+ "coverage_audit_2026_09_21": {
+  "trials_P0001_to_P0003": 396,
+  "finger_available_trials": 271,
+  "finger_absent_trials": 125,
+  "finding": "Finger availability is PERFECTLY CONFOUNDED WITH SESSION. Session 2024-08-28 (125 trials, all P0001) has no finger markers at all; session 2025-12-18 (271 trials, P0001/P0002/P0003) has them on every trial. Wrist, thumb and pinky are present in both sessions.",
+  "consequence": "A complete-case M4 analysis IS an analysis of the 2025-12-18 session. M3 and M4 must therefore be scored on the identical finger-available population, or any difference confounds hands with session.",
+  "ball_finite_fraction_median": 1.0,
+  "ball_finite_fraction_min": 0.867
+ },
+ "primary_comparison": {
+  "contrast": "M4_minus_M3",
+  "M3": "ball prefix + full-body joints available by the decision time",
+  "M4": "M3 plus supported hand/finger motion available by the decision time",
+  "target": "ball position at the matched 100 ms horizon",
+  "population": "finger_available",
+  "declared_before_results": true,
+  "immutable": "This contrast, target and population may not be changed after any result is seen. A different contrast requires a new packet ID."
+ },
+ "secondary": [
+  {
+   "contrast": "M4_minus_M3b",
+   "purpose": "does the fine finger chain add beyond a coarse hand (thumb+pinky)? replaces the wrist-only ablation, which would have duplicated M3"
+  },
+  {
+   "contrast": "M4_hand_target",
+   "purpose": "can the same representation forecast supported hand/finger positions"
+  },
+  {
+   "horizons_ms": [
+    33,
+    67,
+    100,
+    133
+   ],
+   "purpose": "prespecified horizon sweep; 100 ms remains primary"
+  }
+ ],
+ "decision_policy": {
+  "mode": "fixed_cadence",
+  "note": "Fixed-cadence decisions only. The source release proxy may stratify plots and evaluation, but it is retrospective and must never be represented as a trigger known in advance.",
+  "inputs_available_strictly_at_or_before": "decision_time_ms",
+  "targets_strictly_after": "decision_time_ms",
+  "cadence_ms": 100,
+  "anchor": "trial_start",
+  "cadence_rationale": "100 ms of real time from trial start, converted to samples per trial from that trial's own measured interval (6 samples at 60 Hz, 3 at 30 Hz). Structural only - no event knowledge. Windows within a trial overlap and are NOT independent; grouping is by athlete.",
+  "eligible_decision_range": "decisions with a complete prefix AND a matchable target; all others are counted UNAVAILABLE with a reason"
+ },
+ "target_matching": {
+  "requested_horizon_ms": 100,
+  "tolerance_ms": 8,
+  "rule": "nearest native sample whose |t - (decision + horizon)| <= tolerance; otherwise the example is UNAVAILABLE and is counted, never imputed",
+  "tolerance_rationale": "half the primary population's measured 17 ms interval. Frozen before fitting; it may not be widened to rescue a horizon. v1's 17 ms came from the wrong session - see amendment RS-A1.",
+  "targets": {
+   "primary": "ball_centre_xyz",
+   "secondary": "supported hand/finger positions (same matched sample)"
+  }
+ },
+ "splits": {
+  "grouping": "athlete",
+  "scheme": "athlete_held_out",
+  "note": "Three development athletes. Shot or window resampling does NOT establish uncertainty over future athletes; report per athlete and say so.",
+  "model_selection": "inside the training partition only"
+ },
+ "missingness": {
+  "policy": "complete_case_on_declared_population",
+  "forbidden": "A missing marker may never become a zero coordinate. NaN stays NaN.",
+  "reporting": "Every intended example is eligible or carries an explicit refusal reason; coverage over the full intended population is reported alongside paired performance."
+ },
+ "baselines_before_learning": [
+  "held_position",
+  "constant_velocity_from_prefix",
+  "prefix_estimated_ball_dynamics"
+ ],
+ "baseline_note": "Free-flight gravity is NOT a valid model for a ball still being accelerated by the hand, so it is not among the release-window baselines.",
+ "metrics": {
+  "ball_future": [
+   "endpoint_3d_error_m",
+   "per_axis_error_m",
+   "coverage"
+  ],
+  "hand_future": [
+   "declared_joint_family_error_m"
+  ],
+  "distributional": [
+   "proper_score",
+   "empirical_coverage",
+   "interval_width"
+  ],
+  "cost": [
+   "runtime_s",
+   "unavailable_cases"
+  ]
+ },
+ "stop_rules": [
+  "A null or mixed M4-minus-M3 result is a valid outcome and is reported as such.",
+  "No horizon, tolerance, population or contrast may be selected after seeing results.",
+  "No protected participant is opened.",
+  "No future flight may enter any input.",
+  "Inputs are native full-precision source values, never the viewer's rounded display arrays."
+ ],
+ "not_claimed": [
+  "spin, ball orientation or angular velocity",
+  "finger force, pressure or muscle activation",
+  "physical contact (hand-ball geometry is centre-to-marker distance only)",
+  "millimetre physical accuracy",
+  "any causal or coaching claim"
+ ],
+ "prefix": {
+  "length_ms": 267,
+  "rule": "the samples covering 267 ms at or before the decision, inclusive of the decision sample; converted per trial from its measured interval",
+  "min_finite_fraction": 1.0,
+  "min_finite_rationale": "complete case; an incomplete prefix is UNAVAILABLE, never zero-filled"
+ },
+ "feature_families": {
+  "M3": {
+   "ball": [
+    "ball_centre_xyz"
+   ],
+   "joints": [
+    "LEFT_SHOULDER",
+    "RIGHT_SHOULDER",
+    "LEFT_ELBOW",
+    "RIGHT_ELBOW",
+    "LEFT_WRIST",
+    "RIGHT_WRIST",
+    "LEFT_HIP",
+    "RIGHT_HIP",
+    "LEFT_KNEE",
+    "RIGHT_KNEE",
+    "LEFT_ANKLE",
+    "RIGHT_ANKLE"
+   ],
+   "note": "ball plus the 12 CORE_KEYPOINTS the existing pipeline already consumes"
+  },
+  "M4": {
+   "adds_marker_pattern": "FINGER|THUMB|PINKY",
+   "note": "M4 is a strict superset of M3: identical ball prefix, identical joints, plus the finger/thumb/pinky markers. Nothing is removed, so a difference cannot come from losing an M3 input."
+  },
+  "superset_required": true,
+  "M3b_hand_coarse": {
+   "adds_marker_pattern": "^(LEFT|RIGHT)_(THUMB|PINKY)$",
+   "note": "The proposed 'wrist-only' ablation would have DUPLICATED M3 - LEFT/RIGHT_WRIST are already among the 12 core joints, so adding them adds nothing. The meaningful intermediate is the COARSE hand: thumb and pinky only. M3b therefore isolates whether the fine finger chain adds anything beyond a coarse hand, via M4 - M3b."
+  }
+ },
+ "amendments": [
+  {
+   "id": "RS-A1",
+   "date": "2026-09-21",
+   "status": "pre-fit; no model had been fitted when this was recorded",
+   "defect": "v1 recorded a blanket 30 Hz premise generalised from the FIRST trial on disk, which belongs to the older 2024-08-28 session. The scored population is the 2025-12-18 session at 60 Hz (measured median dt 17.0 ms).",
+   "consequences_corrected": [
+    "cadence_samples 3 meant 51 ms on the primary population, not the declared 100 ms",
+    "prefix 8 samples meant 136 ms, not the declared 267 ms",
+    "tolerance_ms 17 EXCEEDED the primary population's 16.67 ms interval; the gate's own rule would have refused it, and passed only because the config declared 30 Hz"
+   ],
+   "correction": "Cadence and prefix are now declared in milliseconds and converted per trial from that trial's measured interval. Tolerance is 8 ms (half the 60 Hz interval).",
+   "unchanged": "The scientific question, the M4-minus-M3 contrast, the 100 ms horizon, the population and the athlete-held-out design are NOT changed by this amendment."
+  },
+  {
+   "id": "RS-A2",
+   "date": "2026-09-21",
+   "status": "POST-HOC with respect to the saturation observation; the pre-registered result stands",
+   "observation": "In the pre-registered run, alpha was selected at the grid MAXIMUM (100.0) in 9 of 9 outer-fold x family fits. A hyperparameter pinned to the edge of its grid means the search never contained the optimum.",
+   "defect": "The frozen selection budget was too narrow. This is a budget defect, not a result: it was observable from the selected alphas alone, without looking at any error value.",
+   "amendment": "Extend the grid to 1e3..1e7 in addition to the pre-registered 1e-4..1e2.",
+   "honesty_constraint": "Choosing a budget after seeing results is exactly what the protocol exists to prevent. So the amended grid does NOT replace the pre-registered result: both are fitted and both are reported, and the pre-registered one remains primary. If the amended grid changes the M4-minus-M3 conclusion, that instability is itself the finding.",
+   "unchanged": "The scientific question, the M4-minus-M3 contrast, the horizon, the tolerance, the population, the feature families and the athlete-held-out design are NOT changed."
+  }
+ ],
+ "numerical_validity": {
+  "rule": "a coordinate is a finite real number: not NaN, not +/-inf, and not a bool",
+  "defect_corrected": "v1's finite() checked isinstance(int,float) only, so NaN, infinity and True all passed as coordinates"
+ },
+ "model": {
+  "family": "ridge_regression_closed_form",
+  "why": "one regularized explicit-state model; linear, deterministic and fully inspectable, so a difference between M3 and M4 is attributable to the inputs rather than to optimiser noise",
+  "target_parameterisation": "DISPLACEMENT of the ball from its decision-sample position to the matched target, then added back. Never predicts an absolute coordinate directly.",
+  "feature_map": {
+   "per_tracked_point": [
+    "position at the decision sample MINUS the decision-sample ball position",
+    "velocity over the final prefix interval"
+   ],
+   "note": "Prefix-only by construction: every term is formed from samples at or before the decision.",
+   "standardisation": "mean/scale fitted on the TRAINING partition only and applied to the held-out athlete"
+  },
+  "selection": {
+   "hyperparameter": "alpha",
+   "grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+   ],
+   "budget": "7 alphas (pre-registered) and 12 alphas (RS-A2) x 2 inner folds per family per outer fold; identical for M3, M3b and M4",
+   "inner_scheme": "leave-one-training-athlete-out; the held-out athlete is never used for selection",
+   "grid_as_preregistered": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+   ],
+   "grid_amended_RS_A2": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0,
+    1000000.0,
+    10000000.0
+   ],
+   "reporting": "BOTH grids are fitted and BOTH results are reported. The pre-registered grid's result is the primary one and is never replaced; the amended grid's result is reported alongside it, labelled as post-hoc with respect to the observed saturation."
+  },
+  "seed": 20260921,
+  "determinism": "closed-form ridge has no stochastic component; the seed is recorded for any future resampling and is not consumed by this fit"
+ },
+ "aggregation": {
+  "primary_statistic": "mean 3D endpoint error in metres, on identical example IDs",
+  "primary_aggregate": "the unweighted MEAN OF THE THREE ATHLETE MEANS",
+  "why": "windows overlap and are not independent, and the athletes contribute unequal counts. Pooling windows would weight the athlete with the most usable windows most heavily and would overstate precision.",
+  "also_reported": [
+   "per-athlete means",
+   "per-axis signed error",
+   "coverage",
+   "pooled window mean for reference only"
+  ]
+ },
+ "protocol_identity": {
+  "scientific_digest": "13ba8b60857ff659079b1f349601af0295163d17aab519b2524a76eef2179514",
+  "covers": [
+   "primary_comparison",
+   "target_matching",
+   "decision_policy",
+   "prefix",
+   "feature_families",
+   "splits",
+   "missingness",
+   "participants",
+   "native_timing",
+   "model",
+   "aggregation"
+  ],
+  "rule": "Recomputed by the gate on every run. An edit to the horizon, tolerance, cadence, prefix, feature families, splits, missingness, participants, timing, MODEL BUDGET or aggregation changes it and is REFUSED. The builder additionally accepts --expect-config-sha256.",
+  "why": "v1 declared the comparison 'immutable' in prose. Prose does not refuse a changed horizon. `model` and `aggregation` are covered because a selection budget or an aggregation rule changed after seeing results is the same failure as a changed horizon - RS-A2 must be visible as a digest change, not slip through as a 'mere implementation detail'."
+ },
+ "supersedes": {
+  "config": "release_state_v1.json",
+  "scientific_digest": "d7df77b753045373aedbd980b4e462c0bec383ca55056096e2f106cc209d2b19",
+  "reason": "V16-U1: the builder copied SPL FEET into fields named `_m` and nothing downstream converted, so every metre-labelled value in the v1 reports was a foot value. The v1 config and reports are preserved unchanged.",
+  "what_did_not_change": "No scientific choice changed: horizon, cadence, prefix, families, splits, tolerance, population and model budget are identical. Only the unit contract is now declared and enforced."
+ },
+ "units": {
+  "source_units": "feet",
+  "analysis_units": "metres",
+  "conversion": 0.3048,
+  "conversion_note": "1 ft = 0.3048 m, exact by definition (international foot).",
+  "applied_at": "build_release_state_dataset.to_metres, once, to ball, body and hand coordinates together",
+  "not_converted": "`time` is milliseconds and is never scaled; tolerance_ms and cadence_ms are durations, not lengths.",
+  "evidence": "Measured on the pinned tree: ball z peaks at 13.139 and hip z sits near 3.296. As metres those are 13.1 m and 3.3 m, both impossible; as feet they are 4.0 m and 1.0 m, both correct."
+ }
+}

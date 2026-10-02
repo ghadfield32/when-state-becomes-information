@@ -1,0 +1,23 @@
+{
+  "packet": "OW-REGIME-17",
+  "question": "At the existing fixed-cutoff MLSE baseline (cutoff 2.0 s after each trial's first tracking timestamp, 200 ms history, horizons 50/100/200 ms), what motion regime does the observed 200 ms future occupy on development participants, and how long does supplied ball tracking continue after the cutoff? This decides whether a gravity dynamics model is a physical candidate or a deliberately mismatched comparator before any real-data estimator run.",
+  "data_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+  "inventory_sha256": "acf8238d98c8296af5d7894a329a4f02e14a81c1002821bf0d45d25830a34c47",
+  "participants": ["P0001", "P0002", "P0003"],
+  "not_opened": {"P0004": "historically consulted validation participant; not reopened for design decisions", "P0005": "locked test participant; never opened by this packet"},
+  "expected_trials": 396,
+  "eligibility": "unchanged baseline rule: run_prefix_forecast.fit_prefix and target_index (cutoff 2.0 s, history 0.2 s, >= 3 finite samples, no gap > 1.6 frames incl. window edges, first native target at or after each horizon within one frame)",
+  "horizons_s": [0.05, 0.1, 0.2],
+  "future_window_s": 0.2,
+  "minimum_future_samples_for_fits": 4,
+  "gravity_m_s2": 9.81,
+  "vertical_axis_index": 2,
+  "units": "metres and seconds; source feet converted by 0.3048; time re-zeroed to the first tracking timestamp",
+  "diagnostics": {
+    "cutoff_state": "height z and OLS velocity (fit_prefix) at the cutoff",
+    "future_fits": "least-squares fits to finite ball samples in (cutoff, cutoff + 0.2 s], time relative to the cutoff: constant velocity (per-axis linear), gravity-only (fixed -g on z, linear otherwise), free quadratic; report 3D RMSE of each and the free-quadratic vertical acceleration 2*c2_z",
+    "tracking_tail": "last finite ball sample time minus the cutoff",
+    "release_heuristic": "wms.physics.free_throw.select_ballistic_window with its defaults over the WHOLE trajectory; a noncausal diagnostic only, never a label or model input. The reported time is the START of the selected gravity-consistent window, and equal fits are tie-broken toward later frames, so it marks where ballistic-looking motion is present, not the release instant. Timing is categorised relative to the history window and future window, or none_found"
+  },
+  "decision": "report counts, reasons and quantiles (5/25/50/75/95) by session/participant and overall; no thresholds are applied; the next task card is frozen from these distributions"
+}

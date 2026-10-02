@@ -1,0 +1,60 @@
+reproduces committed equal-athlete means: max abs diff 4.51e-07 m
+grid=preregistered release_proxy_radii=primary resamples=10000 seed=20260929 unit=trial-within-athlete (mm; negative = first model better)
+near  M4-constant_velocity: P0001 -115.7 [-128.0,-101.2] | P0002 -118.2 [-131.7,-104.4] | P0003 +14.9 [+10.5,+19.7] | EQUAL -73.0 [-79.4,-66.2]
+near  M4-M3: P0001 -16.9 [-21.5,-12.1] | P0002 -13.5 [-18.7,-8.6] | P0003 -19.9 [-22.1,-17.8] | EQUAL -16.8 [-19.2,-14.4]
+near  M4-M3b: P0001 -9.9 [-12.3,-7.5] | P0002 -8.1 [-12.6,-3.9] | P0003 -24.6 [-26.9,-22.2] | EQUAL -14.2 [-16.1,-12.4]
+near  M3b-M3: P0001 -7.0 [-10.0,-3.9] | P0002 -5.4 [-6.6,-4.2] | P0003 +4.6 [+4.0,+5.3] | EQUAL -2.6 [-3.7,-1.5]
+whole M4-constant_velocity: P0001 -45.5 [-124.4,+0.2] | P0002 +19.9 [+13.1,+26.2] | P0003 +49.6 [+44.6,+54.4] | EQUAL +8.0 [-18.7,+23.8]
+far   M4-constant_velocity: P0001 +10.9 [-1.7,+21.6] | P0002 +23.4 [+19.5,+27.2] | P0003 +15.6 [+12.3,+18.5] | EQUAL +16.6 [+12.2,+20.5]
+post  M4-constant_velocity: P0001 -74.6 [-203.8,-0.5] | P0002 +24.3 [+8.3,+38.6] | P0003 +79.8 [+69.8,+89.6] | EQUAL +9.9 [-34.2,+36.1]
+
+reproduces committed equal-athlete means: max abs diff 3.66e-07 m
+grid=preregistered release_proxy_radii=1.5 resamples=10000 seed=20260929 unit=trial-within-athlete (mm; negative = first model better)
+near  M4-constant_velocity: P0001 -118.2 [-130.4,-105.3] | P0002 -125.1 [-139.1,-111.0] | P0003 +11.7 [+7.9,+15.7] | EQUAL -77.2 [-83.6,-70.7]
+near  M4-M3: P0001 -13.7 [-18.5,-8.7] | P0002 -6.4 [-11.1,-1.8] | P0003 -20.1 [-22.5,-17.8] | EQUAL -13.4 [-15.8,-11.0]
+near  M4-M3b: P0001 -9.8 [-12.8,-7.1] | P0002 -3.0 [-7.2,+1.2] | P0003 -24.5 [-26.9,-22.0] | EQUAL -12.4 [-14.3,-10.6]
+near  M3b-M3: P0001 -3.8 [-6.8,-0.8] | P0002 -3.4 [-4.6,-2.3] | P0003 +4.3 [+3.7,+5.0] | EQUAL -1.0 [-2.0,+0.2]
+whole M4-constant_velocity: P0001 -45.5 [-124.8,+0.7] | P0002 +19.9 [+13.1,+26.2] | P0003 +49.6 [+44.7,+54.5] | EQUAL +8.0 [-18.7,+24.0]
+far   M4-constant_velocity: P0001 +9.9 [-1.7,+18.7] | P0002 +24.1 [+19.8,+28.1] | P0003 +15.2 [+11.8,+18.3] | EQUAL +16.4 [+12.3,+19.9]
+post  M4-constant_velocity: P0001 -72.0 [-197.0,-0.5] | P0002 +23.5 [+9.4,+36.3] | P0003 +78.9 [+69.2,+88.3] | EQUAL +10.2 [-32.5,+35.4]
+
+reproduces committed equal-athlete means: max abs diff 4.94e-07 m
+grid=preregistered release_proxy_radii=3.0 resamples=10000 seed=20260929 unit=trial-within-athlete (mm; negative = first model better)
+near  M4-constant_velocity: P0001 -86.6 [-102.9,-68.5] | P0002 -83.4 [-98.2,-68.9] | P0003 +44.7 [+37.9,+51.7] | EQUAL -41.8 [-49.5,-33.7]
+near  M4-M3: P0001 -19.9 [-23.7,-15.9] | P0002 -30.7 [-36.2,-25.3] | P0003 -26.0 [-28.4,-23.6] | EQUAL -25.5 [-27.9,-23.1]
+near  M4-M3b: P0001 -6.7 [-9.2,-4.2] | P0002 -19.8 [-24.2,-15.4] | P0003 -30.5 [-32.9,-28.1] | EQUAL -19.0 [-20.9,-17.1]
+near  M3b-M3: P0001 -13.2 [-15.1,-11.2] | P0002 -10.9 [-12.4,-9.4] | P0003 +4.5 [+3.9,+5.2] | EQUAL -6.5 [-7.4,-5.7]
+whole M4-constant_velocity: P0001 -45.5 [-124.8,+0.5] | P0002 +19.9 [+13.0,+25.9] | P0003 +49.6 [+44.6,+54.5] | EQUAL +8.0 [-18.7,+23.9]
+far   M4-constant_velocity: P0001 +6.5 [-5.4,+17.2] | P0002 +18.4 [+13.9,+22.6] | P0003 +15.0 [+11.9,+17.9] | EQUAL +13.3 [+9.0,+17.3]
+post  M4-constant_velocity: P0001 -78.0 [-213.4,+0.4] | P0002 +29.5 [+12.9,+43.9] | P0003 +81.0 [+70.6,+90.9] | EQUAL +10.8 [-35.4,+38.6]
+
+reproduces committed equal-athlete means: max abs diff 4.17e-07 m
+grid=amended_RS_A2 release_proxy_radii=primary resamples=10000 seed=20260929 unit=trial-within-athlete (mm; negative = first model better)
+near  M4-constant_velocity: P0001 -115.7 [-128.0,-101.2] | P0002 -100.4 [-114.5,-85.9] | P0003 +24.3 [+18.7,+30.5] | EQUAL -63.9 [-70.5,-56.9]
+near  M4-M3: P0001 -16.9 [-21.5,-12.1] | P0002 -63.2 [-68.0,-58.1] | P0003 +14.0 [+12.4,+15.5] | EQUAL -22.0 [-24.3,-19.7]
+near  M4-M3b: P0001 -9.9 [-12.3,-7.5] | P0002 -39.4 [-42.7,-35.8] | P0003 +3.7 [+2.4,+5.0] | EQUAL -15.2 [-16.6,-13.6]
+near  M3b-M3: P0001 -7.0 [-10.0,-3.9] | P0002 -23.9 [-25.5,-22.1] | P0003 +10.2 [+9.5,+11.0] | EQUAL -6.9 [-8.0,-5.7]
+whole M4-constant_velocity: P0001 -45.5 [-124.4,+0.2] | P0002 +21.3 [+14.3,+27.8] | P0003 +54.9 [+49.9,+59.8] | EQUAL +10.2 [-16.3,+26.1]
+far   M4-constant_velocity: P0001 +10.9 [-1.7,+21.6] | P0002 +20.7 [+16.6,+24.6] | P0003 +13.1 [+9.8,+16.0] | EQUAL +14.9 [+10.5,+18.9]
+post  M4-constant_velocity: P0001 -74.6 [-203.8,-0.5] | P0002 +30.3 [+13.5,+45.3] | P0003 +91.4 [+81.3,+101.1] | EQUAL +15.7 [-28.3,+42.1]
+
+reproduces committed equal-athlete means: max abs diff 4.34e-07 m
+grid=amended_RS_A2 release_proxy_radii=1.5 resamples=10000 seed=20260929 unit=trial-within-athlete (mm; negative = first model better)
+near  M4-constant_velocity: P0001 -118.2 [-130.4,-105.3] | P0002 -120.6 [-135.2,-106.5] | P0003 +18.9 [+14.2,+24.0] | EQUAL -73.3 [-79.9,-66.7]
+near  M4-M3: P0001 -13.7 [-18.5,-8.7] | P0002 -48.9 [-55.6,-41.7] | P0003 +14.4 [+12.9,+15.8] | EQUAL -16.1 [-18.9,-13.1]
+near  M4-M3b: P0001 -9.8 [-12.8,-7.1] | P0002 -28.9 [-33.7,-23.9] | P0003 +3.8 [+2.5,+5.1] | EQUAL -11.7 [-13.6,-9.7]
+near  M3b-M3: P0001 -3.8 [-6.8,-0.8] | P0002 -19.9 [-22.2,-17.4] | P0003 +10.5 [+9.8,+11.3] | EQUAL -4.4 [-5.7,-3.1]
+whole M4-constant_velocity: P0001 -45.5 [-124.8,+0.7] | P0002 +21.3 [+14.3,+27.8] | P0003 +54.9 [+49.9,+59.8] | EQUAL +10.2 [-16.5,+26.2]
+far   M4-constant_velocity: P0001 +9.9 [-1.7,+18.7] | P0002 +21.7 [+17.2,+25.9] | P0003 +12.7 [+9.2,+15.8] | EQUAL +14.8 [+10.6,+18.3]
+post  M4-constant_velocity: P0001 -72.0 [-197.0,-0.5] | P0002 +29.1 [+14.3,+42.5] | P0003 +90.3 [+80.4,+99.8] | EQUAL +15.8 [-26.8,+41.0]
+
+reproduces committed equal-athlete means: max abs diff 4.04e-07 m
+grid=amended_RS_A2 release_proxy_radii=3.0 resamples=10000 seed=20260929 unit=trial-within-athlete (mm; negative = first model better)
+near  M4-constant_velocity: P0001 -86.6 [-102.9,-68.5] | P0002 -47.8 [-62.6,-33.3] | P0003 +71.2 [+62.3,+80.7] | EQUAL -21.0 [-29.2,-12.7]
+near  M4-M3: P0001 -19.9 [-23.7,-15.9] | P0002 -77.1 [-81.1,-73.0] | P0003 -0.1 [-3.4,+3.0] | EQUAL -32.4 [-34.5,-30.2]
+near  M4-M3b: P0001 -6.7 [-9.2,-4.2] | P0002 -50.0 [-53.0,-46.9] | P0003 -5.2 [-7.6,-2.9] | EQUAL -20.6 [-22.2,-19.1]
+near  M3b-M3: P0001 -13.2 [-15.1,-11.2] | P0002 -27.1 [-28.2,-26.0] | P0003 +5.1 [+4.1,+6.1] | EQUAL -11.8 [-12.6,-10.9]
+whole M4-constant_velocity: P0001 -45.5 [-124.8,+0.5] | P0002 +21.3 [+14.1,+27.7] | P0003 +54.9 [+49.8,+59.8] | EQUAL +10.2 [-16.5,+26.1]
+far   M4-constant_velocity: P0001 +6.5 [-5.4,+17.2] | P0002 +15.7 [+11.0,+20.1] | P0003 +12.5 [+9.3,+15.4] | EQUAL +11.6 [+7.3,+15.6]
+post  M4-constant_velocity: P0001 -78.0 [-213.4,+0.4] | P0002 +34.6 [+17.3,+49.7] | P0003 +92.2 [+81.9,+101.9] | EQUAL +16.3 [-30.1,+44.0]
+

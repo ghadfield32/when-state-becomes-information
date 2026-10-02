@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite this research software; no accepted publication is claimed."
+title: "When State Becomes Information: Release-Conditioned Basketball Forecasting"
+type: software
+authors:
+  - family-names: Hadfield
+    given-names: Geoffrey
+    affiliation: World model Sports LLC
+license: MIT
+abstract: >-
+  Reproduction source and aggregate evidence for a retrospective three-athlete
+  study of 100 ms ball forecasts from nested body and hand information sets.
+  Participant data is separately licensed and is not included.

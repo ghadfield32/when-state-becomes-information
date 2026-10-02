@@ -1,0 +1,69 @@
+# Universal release status — E1
+#
+# Single source of truth for "how done is this paper". It exists so "done" is
+# never ambiguous between: model done / paper done / reviewed / public / submitted.
+#
+# Rule: a `true` here must name the evidence that established it. A field that has
+# not been checked is `false`, not omitted.
+
+paper:
+  title: "When State Becomes Information: Release-Conditioned Basketball Forecasting"
+  author: Geoffrey Hadfield
+  affiliation: World Model Sports LLC
+  email: geoff@worldmodelsports.com
+  identity: E1
+  paper_title_scope: "historical three-athlete study only"
+
+status:
+  science_frozen: true               # tag e1-2026-10-01
+  scope_frozen: true                 # three athletes, P0001-P0003; no later studies absorbed
+  abstract_frozen: true              # 482 ordinary / 453 aggressive words, under 500
+  clean_reproduction_passed: true    # clean clone at the tag; see REPRODUCTION_RECEIPT.json
+  independent_review_passed: true    # REVIEW.md: three passes, APPROVE with two MINOR
+  release_hygiene_review_passed: false  # the 2026-10-01 governance artifacts are NOT yet reviewed
+  rights_documented: true            # RIGHTS.md + THIRD_PARTY_NOTICES.md; no permission asserted
+  rights_review_passed: false        # SPL terms preserved, not cleared; venue interpretation open
+  user_publication_approval: true    # repository is public under explicit operator authorization
+  public_repository_created: true    # https://github.com/ghadfield32/ssac27-release-conditioned-forecasting
+  public_reproduction_passed: true   # anonymous clone; 396/396 verified; reproduce.py exit 0
+  submission_snapshot_created: false # tag created at the submission boundary
+  submitted: false                   # no Sloan form submitted; no receipt
+
+identity_hierarchy:
+  historical_science_tag: e1-2026-10-01
+  historical_science_commit: 9f4b38df3e1ffc577d670463ee5b74d4fbba7255
+  submission_tag: null               # set at the submission boundary; the science tag does not move
+  public_remote: https://github.com/ghadfield32/ssac27-release-conditioned-forecasting
+  public_branch: main
+
+reproduction_levels:
+  source_only_tests: true            # pytest -c pytest-source.ini
+  pinned_public_acquisition: true    # fetch_data.py, 396 files at revision a3f9cffb
+  full_scientific_reproduction: true # reproduce.py refits and compares to the committed reports
+  L_note: "Reproduction here IS a fresh refit from pinned public inputs, stronger than PMI's L1 replay"
+
+explicitly_out_of_scope:
+  - five-athlete transfer
+  - P0004 / P0005
+  - direction study
+  - left-hand sensitivity
+  - JEPA / Bayesian / physics-informed challengers
+  - physical tracking accuracy
+  - live forecasting
+  - make/miss
+  - coaching benefit
+  - athlete-to-athlete transfer at n > 3
+
+blockers:
+  - id: E1-G1
+    what: venue interpretation of the data requirement
+    detail: "Sloan asks for the research data in the open repository. This package uses deterministic linked acquisition from a pinned upstream revision and bundles no participant data. Whether that satisfies the requirement is a venue-interpretation question, stated in RIGHTS.md and not resolved here."
+    state: OPEN
+  - id: E1-G2
+    what: independent review of the governance layer
+    detail: "The 2026-10-01 governance artifacts have not had their own read-only non-author review."
+    state: OPEN
+  - id: E1-G3
+    what: Sloan submission
+    detail: "No abstract submission and no receipt. The public repository and reproduction are complete."
+    state: OPEN

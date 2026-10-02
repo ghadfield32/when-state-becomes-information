@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "world-model-learning-lab"
+version = "0.14.0"
+description = "Step-by-step learning and implementation lab for hybrid physical world models"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=2.0",
+  "torch>=2.4",
+  "matplotlib>=3.8",
+  "omegaconf>=2.3,<3",
+  "pydantic>=2.12,<3",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+datasets = ["huggingface_hub>=0.34", "kaggle>=1.6"]
+dataeng = ["pandas>=2.2", "pyarrow>=18", "duckdb>=1.2"]
+foundation = ["torchvision", "timm", "einops"]
+kinetics = ["ezc3d>=1.5"]
+
+# --- Accelerator lanes (OW-GPU-01 / F-OW-11) ---------------------------------
+#
+# Exactly one accelerator extra may be active. They are declared mutually
+# exclusive in [tool.uv].conflicts below, so `--all-extras` is no longer a
+# valid invocation for this project and the Dockerfile selects a lane
+# explicitly instead.
+#
+# Why this exists: upstream's DEFAULT torch wheel is the CUDA build, so the
+# previous single-lane lock resolved `torch 2.14.0+cu130` into an image whose
+# scientific core is CPU-only. Measured in that image: torch dir 1,087.5 MB and
+# nvidia/* 3,194.7 MB (4.3 GB total), with `torch.cuda.is_available()` False --
+# the worst of both worlds: GPU payload weight AND no usable GPU. The same
+# uv.lock resolved `+cpu` on the host venv and `+cu130` in the container, which
+# is the inconsistency this split removes.
+#
+# Pins are exact and copied from the reviewed lock (torch 2.14.0,
+# torchvision 0.29.0) so a lane change cannot silently move the version.
+# Verified present on both indexes before being written here:
+#   cpu   : torch-2.14.0+cpu-cp312-cp312-manylinux_2_28_x86_64.whl
+#   cu130 : torch-2.14.0+cu130-cp312-cp312-manylinux_2_28_x86_64.whl
+cpu = ["torch==2.14.0", "torchvision==0.29.0"]
+cu130 = ["torch==2.14.0", "torchvision==0.29.0"]
+
+[tool.uv]
+# A CPU lane and a CUDA lane must never be resolved together. Without this,
+# `--all-extras` would ask uv to install two builds of the same torch.
+conflicts = [
+    [{ extra = "cpu" }, { extra = "cu130" }],
+]
+
+[tool.uv.sources]
+# The index is selected by the ACTIVE EXTRA, not by platform or by luck.
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+
+# `explicit = true` means these indexes are used ONLY when a package's source
+# names them. They are never consulted as general fallbacks, so no unrelated
+# dependency can be silently served by the PyTorch index.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+# `gpu` marks tests that require a real CUDA device. They are DESELECTED by
+# default so the CPU lane never depends on a device being present, and the
+# container `test` profile stays device-independent. Run them explicitly with
+# `pytest -m gpu` in the cu130 image (`compose --profile gpu-test`).
+markers = [
+    "private_evidence: requires retained research evidence or quarantined legacy source omitted from the public package",
+    "real_data: requires an explicitly admitted pinned real snapshot",
+    "gpu: requires a real CUDA device; excluded from the default CPU suite",
+]
+addopts = "-m 'not gpu and not real_data and not private_evidence'"

@@ -1,0 +1,80 @@
+{
+  "packet": "OW-R6L-CAUSAL-ISSUANCE-01",
+  "schema": "wms.causal_issuance_config.v1",
+  "question": "Can the constant-velocity ball forecast be ISSUED through an operational path (opportunity -> inputs available by the cutoff -> causal state -> forecast or named abstention -> immutable journal) whose every record is provably independent of the future, and then EVALUATED later against references matched by a declared policy?",
+  "evidence_class": "engineering + retrospective replay of offline motion capture; not a live deployment",
+  "source": {
+    "dataset": "SPL Open Data free-throw motion capture (MLSE Sport Performance Lab)",
+    "data_revision": "a3f9cffbd",
+    "participants": ["P0001", "P0002", "P0003"],
+    "protected_participants_never_opened": ["P0004", "P0005"],
+    "units": "source feet converted to metres once, at load (wms.data.mlse_spl.FEET_TO_METERS)",
+    "stream": "ball centre only; body and hand landmarks are not inputs to this forecaster"
+  },
+  "availability": {
+    "rule": "a sample becomes available at its own native timestamp",
+    "declared_latency_ms": 0,
+    "why": "offline motion capture has no recorded arrival time; zero latency is DECLARED, not measured, and a live source must replace it with measured availability"
+  },
+  "opportunities": {
+    "schedule": "clock",
+    "anchor": "first_sample_time",
+    "cadence_ms": 100,
+    "last": "latest opportunity at or before the stream close (the last available sample)",
+    "never": "a whole-trial statistic (e.g. a median interval) or any later sample"
+  },
+  "target": {
+    "requested": "issue_time_ms + horizon_ms, exactly",
+    "horizon_ms": 100,
+    "never": "the timestamp of whichever reference sample later turns out to exist"
+  },
+  "state_estimators": {
+    "causal_velocity_v1": {
+      "definition": "secant over the two most recent available ball samples at or before the cutoff: (p_last - p_prev) / (t_last - t_prev), m/ms",
+      "minimum_history": {
+        "window_ms": 267,
+        "rule": "the most recent sample at or before cutoff - 267 ms must exist, and every ball sample from it through the latest sample at or before the cutoff must be finite (E1's complete-prefix rule, applied at the cutoff)",
+        "abstentions": ["no_sample_at_or_before_cutoff", "prefix_before_stream_start", "prefix_ball_incomplete",
+                        "prefix_too_few_samples"]
+      },
+      "implemented": true
+    },
+    "causal_acceleration_v1": {
+      "definition": "second divided difference over the three most recent available ball samples at or before the cutoff, m/ms^2",
+      "minimum_history": {"samples": 3, "rule": "the three most recent samples at or before the cutoff are finite with strictly increasing times"},
+      "implemented": true,
+      "used_by_forecaster": false
+    },
+    "prefix_phase_v1": {
+      "definition": "a phase label inferred from the prefix only (gather / set / release / flight), never the retrospective release proxy",
+      "minimum_history": "declared by the phase model that implements it",
+      "implemented": false,
+      "status": "MISSING: requires a causal phase model (R6-M M6); not faked here"
+    }
+  },
+  "forecaster": {
+    "id": "causal_cv.v1",
+    "rule": "p_last + v * (target_requested_ms - t_last), with v = causal_velocity_v1",
+    "inputs": ["ball"]
+  },
+  "journal": {
+    "schema": "wms.issue_journal.v1",
+    "format": "JSON lines; canonical JSON (sorted keys, compact separators, no NaN); each line carries seq and the sha256 of the previous line; a final seal line carries the record count and the last line's sha256",
+    "write": "exclusive create; a journal is never rewritten, and evaluation is a separate file"
+  },
+  "evaluation": {
+    "policy": "nearest native sample to target_requested_ms within tolerance_ms, ties to the earlier sample; the reference must be strictly after the issue time and have a finite ball",
+    "tolerance_ms": 8,
+    "outcomes": {
+      "scored": "a reference exists within tolerance",
+      "pending": "the evaluation clock has not yet passed target_requested_ms + tolerance_ms",
+      "unscoreable": "the tolerance window has passed with no usable reference (reason recorded)"
+    },
+    "evaluation_clock": "the latest available sample time of the stream (for an offline trial, its last sample)"
+  },
+  "not_claimed": [
+    "live latency: availability is declared at zero, not measured",
+    "any accuracy improvement: this is the same constant-velocity forecaster E1 uses, issued causally",
+    "phase-aware issuance: prefix_phase_v1 is declared but not implemented"
+  ]
+}

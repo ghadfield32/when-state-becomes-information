@@ -1,0 +1,51 @@
+{
+  "packet": "OW-CONTEXT-22",
+  "question": "On OW-EVENT-21's release-anchored task, does admissible hand context from the causal prefix reduce the ball-only undershoot? Does a release velocity taken from the hand keypoints that were touching the ball predict 50/100/200 ms positions better than the same continuation using the ball's own end-of-prefix velocity, and does either beat OW-EVENT-21's OLS velocity baseline?",
+  "evidence_class": "development only. P0001-P0003 shaped the OW-EVENT-20 detector, and OW-EVENT-21's post hoc undershoot (velocity below the reference in 98-100% of 2025 trials at 200 ms) motivated this packet and was seen before its design. Not blind, not confirmatory; a confirmatory claim needs newly captured data (P0004 spent, P0005 locked).",
+  "data_revision": "a3f9cffbde917b1e1747cedd6ec25dfab18c6051",
+  "inventory_sha256": "acf8238d98c8296af5d7894a329a4f02e14a81c1002821bf0d45d25830a34c47",
+  "participants": ["P0001", "P0002", "P0003"],
+  "not_opened": {"P0004": "its one permitted consultation was spent in OW-REGIME-19", "P0005": "locked test participant"},
+  "expected_trials": 396,
+  "groups": ["2024-08-28/P0001", "2025-12-18/P0001", "2025-12-18/P0002", "2025-12-18/P0003"],
+  "task": {
+    "config": {"path": "configs/experiments/event_anchored_forecast_v1.json", "sha256": "3926990eeec68525254d9dbf315d3c2105e015a6f427c4ddcc66c429837cd708"},
+    "rule": "OW-EVENT-21's event arm unchanged: OW-EVENT-20 detector and pinned config, integer-millisecond shift of the event sample onto 2.0 s, OW-REGIME-18 freeze_trial (baseline prefix admission, native targets, persistence/velocity/gravity) with its pinned config"
+  },
+  "event21_reproduction": {
+    "manifest": {"path": "reports/world_model/v1_2/event21/retained/run_manifest.json.gz", "original_sha256": "52ec089d2fe92fde789c207693d67ae281bbf4650e5a7f59052384b71c0dbca9"},
+    "frozen_predictions": {"path": "reports/world_model/v1_2/event21/retained/frozen_predictions.json.gz", "original_sha256": "1d85c3a00307b04a285a55391c5170c9978d20bc37133333dd2ab3700adf7b75"},
+    "rule": "every trial's frozen event arm must equal OW-EVENT-21's retained frozen event arm exactly, and every persistence/velocity/gravity error at every scored horizon must equal its retained event-arm error exactly, or the run blocks"
+  },
+  "candidates": {
+    "persistence": "OW-EVENT-21 reference, unchanged",
+    "velocity": "OW-EVENT-21 ball-only OLS velocity baseline, unchanged",
+    "gravity": "OW-EVENT-21 reference (gravity fit over the whole prefix), unchanged",
+    "ball_endpoint_velocity": "ball position and velocity at the event from a least-squares quadratic (constant-acceleration) fit to exactly the admitted ball prefix samples, evaluated at the event; constant-velocity continuation",
+    "ball_endpoint_ballistic": "the same ball event position and velocity; gravity continuation (minus g/2 tau^2 on the vertical axis)",
+    "hand_endpoint_velocity": "the ball event position from the ball quadratic fit; velocity = mean over admitted contact keypoints of each keypoint's quadratic-fit velocity at the event; constant-velocity continuation",
+    "hand_endpoint_ballistic": "the same ball event position and hand velocity; gravity continuation"
+  },
+  "contact_keypoints": "hand keypoints (OW-EVENT-20 naming rule) within the frozen contact boundary (2r) of the ball at the last evaluable sample before the event, i.e. the keypoints whose contact the detector saw end",
+  "keypoint_admission": "each contact keypoint series is admitted with the unchanged baseline fit_prefix rule on the same event-shifted axis (>= 3 finite samples in [event - 200 ms, event], gaps <= 1.6 frames, edges within 1.6 frames); rejected keypoints are recorded with the baseline reason; the hand candidates are unavailable ('no_admitted_contact_keypoint') when none is admitted",
+  "no_new_parameters": "no window length, threshold, weight or learned parameter is added: the quadratic fits use exactly the samples the baseline rule admits, and g comes from the pinned OW-REGIME-18 config",
+  "support_audit": {
+    "finding": "PREP-VIS-01: the detector takes the minimum ball distance over whichever hand keypoints are finite at each sample, so a nearer keypoint disappearing can cross the boundary without any physical separation (reproduced synthetically on the detector)",
+    "rule": "S_prev and S_event are the hand keypoints finite at the last evaluable sample before the event and at the event; C is their intersection. stable: C non-empty and the minimum ball distance over C is <= the boundary at the previous sample and > the boundary at the event. visibility_ambiguous: C non-empty otherwise. no_common_support: C empty. The detector is unchanged; the audit is descriptive and defines the support_stable view."
+  },
+  "horizons_s": [0.05, 0.1, 0.2],
+  "contrasts": [["hand_endpoint_ballistic", "ball_endpoint_ballistic"], ["ball_endpoint_ballistic", "velocity"], ["hand_endpoint_ballistic", "velocity"], ["hand_endpoint_velocity", "ball_endpoint_velocity"], ["ball_endpoint_ballistic", "ball_endpoint_velocity"]],
+  "views": {"common": "event-arm trials scored at that horizon with every candidate available", "support_stable": "common trials whose support audit is stable"},
+  "freeze": "event arm, support audit, contact keypoints, fitted endpoint states and every candidate prediction are written to frozen_predictions.json and hashed before any reference position is read for scoring; the hash is re-checked after scoring",
+  "metrics": "3-D Euclidean error (m) against the supplied track at each native target; per view x group x horizon: n, mean/median/p90 per candidate, signed vertical error (prediction minus reference: mean, median, fraction below), and per contrast the paired mean/median/p90 with a percentile bootstrap 95% CI of the mean over trials. Coverage of hand availability and support status is reported per group. Empty cells are null, never zero.",
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20260915,
+  "label_rule": "per contrast a_minus_b: a_lower if the CI upper bound is below 0; b_lower if the CI lower bound is above 0; not_separated otherwise; undefined if n = 0",
+  "consistency_rule": "per view x horizon x contrast: consistent if all four participant/session groups carry the same defined label, otherwise inconsistent",
+  "key_quantity": "hand_endpoint_ballistic_minus_ball_endpoint_ballistic at 200 ms in the common and support_stable views (per-group means, intervals, labels, consistency), with ball_endpoint_ballistic_minus_velocity at 200 ms in the common view as the ball-only lag control",
+  "decision_rule": "fixed before scoring, descriptive of development data: hand_context_adds_information if the key contrast is consistent with every group a_lower in both views; ball_endpoint_suffices if that does not hold and the lag control is consistent with every group a_lower; mixed otherwise",
+  "cohort_accounting": "per horizon, wms.evaluation.evidence_contracts.reconcile_cohort accounts for all 396 trials exactly once: accepted = common view; rejected = event, prefix, target or hand-availability status",
+  "examples": "per participant/session in the common view: the trial with the lower-median 200 ms hand_endpoint_ballistic error (representative) and the one with the maximum (failure), ties broken by path; ball height against time since the event with the admitted prefix, the supplied reference, the contact keypoints' mean height, and the velocity, ball_endpoint_ballistic and hand_endpoint_ballistic predictions",
+  "verification": "verify-retained checks digests, replays the frozen config, checks the freeze hash, walks every frozen available target to rebuild every error from frozen predictions and retained reference positions, rebuilds the summary, decision and cohort; with --data-root and --inventory it re-derives every frozen row and reference from the pinned data",
+  "not_claimed": ["release ground truth", "contact force or finger-ball rolling", "physical accuracy of supplied keypoints", "causal effect of hand motion on the ball", "uncertainty qualification", "population or unseen-athlete generalization", "transfer to owned video"]
+}
